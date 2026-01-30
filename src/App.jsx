@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Copy, Play, Share2, Clock, Film } from 'lucide-react';
+import { Search, Copy, Play, Share2, Clock, Film, Sparkles, Zap } from 'lucide-react';
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -1292,17 +1292,45 @@ const App = () => {
         <div className="text-center mb-4 sm:mb-6 md:mb-8">
           <div className="flex items-center justify-center gap-2 sm:gap-3 mb-2 sm:mb-3 md:mb-4">
             <Film className="w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14 text-pink-400" />
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight">SceneClips</h1>
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight">FindSceneClips</h1>
           </div>
           <p className="text-purple-200 text-sm sm:text-base md:text-lg mb-3 sm:mb-4 px-4">
             Find the perfect movie moment in seconds
           </p>
+
+          {/* Why and How Section */}
+          <div className="max-w-4xl mx-auto mb-6 sm:mb-8 px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              {/* Why */}
+              <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 sm:p-5 border border-purple-400/20">
+                <div className="flex items-center gap-2 mb-2">
+                  <Sparkles className="w-5 h-5 text-pink-400" />
+                  <h3 className="text-white font-semibold text-base sm:text-lg">Why Use This?</h3>
+                </div>
+                <p className="text-purple-200 text-sm sm:text-base leading-relaxed">
+                  Tired of searching YouTube for that perfect movie clip to text your friends? We've got 124+ iconic moments with direct timestamp links ready to share.
+                </p>
+              </div>
+
+              {/* How */}
+              <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 sm:p-5 border border-purple-400/20">
+                <div className="flex items-center gap-2 mb-2">
+                  <Zap className="w-5 h-5 text-pink-400" />
+                  <h3 className="text-white font-semibold text-base sm:text-lg">How It Works</h3>
+                </div>
+                <p className="text-purple-200 text-sm sm:text-base leading-relaxed">
+                  Search by quote, movie, actor, or emotion. Click "Copy Link" and text it to anyone. The link jumps straight to the moment.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <button
             onClick={shareApp}
             className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-3 sm:px-4 py-2 rounded-lg transition-all text-sm sm:text-base active:scale-95"
           >
             <Share2 className="w-4 h-4" />
-            Share SceneClips
+            Share FindSceneClips
           </button>
           {shareMessage && (
             <div className="mt-2 sm:mt-3 text-green-300 text-xs sm:text-sm font-medium">{shareMessage}</div>
@@ -1310,16 +1338,55 @@ const App = () => {
         </div>
 
         {/* Search */}
-        <div className="mb-4 sm:mb-6 md:mb-8">
-          <div className="relative max-w-3xl mx-auto">
-            <Search className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-purple-300 w-4 h-4 sm:w-5 sm:h-5" />
+        <div className="mb-6 sm:mb-8 md:mb-10">
+          <div className="relative max-w-4xl mx-auto">
+            <Search className="absolute left-4 sm:left-6 top-1/2 transform -translate-y-1/2 text-purple-300 w-5 h-5 sm:w-6 sm:h-6" />
             <input
               type="text"
-              placeholder='Search by quote, movie, actor... Try "freedom", "gladiator", or "Will Ferrell"'
+              placeholder="Search by quote, movie, actor, or emotion..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-white/10 backdrop-blur-md border border-purple-400/30 rounded-xl text-white placeholder-purple-300/70 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm sm:text-base transition-all"
+              className="w-full pl-12 sm:pl-16 pr-4 sm:pr-6 py-5 sm:py-6 md:py-7 bg-white/10 backdrop-blur-md border-2 border-purple-400/30 rounded-2xl text-white placeholder-purple-300/70 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-base sm:text-lg md:text-xl transition-all shadow-lg"
             />
+          </div>
+          
+          {/* Example Searches */}
+          <div className="max-w-4xl mx-auto mt-3 sm:mt-4 text-center">
+            <p className="text-purple-300 text-xs sm:text-sm mb-2">
+              <span className="font-medium">Try searching:</span>
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <button
+                onClick={() => setSearchTerm('gladiator')}
+                className="px-3 py-1.5 bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 rounded-full text-xs sm:text-sm transition-all border border-purple-400/30"
+              >
+                gladiator
+              </button>
+              <button
+                onClick={() => setSearchTerm('freedom')}
+                className="px-3 py-1.5 bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 rounded-full text-xs sm:text-sm transition-all border border-purple-400/30"
+              >
+                freedom
+              </button>
+              <button
+                onClick={() => setSearchTerm('will ferrell')}
+                className="px-3 py-1.5 bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 rounded-full text-xs sm:text-sm transition-all border border-purple-400/30"
+              >
+                Will Ferrell
+              </button>
+              <button
+                onClick={() => setSearchTerm('motivational')}
+                className="px-3 py-1.5 bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 rounded-full text-xs sm:text-sm transition-all border border-purple-400/30"
+              >
+                motivational
+              </button>
+              <button
+                onClick={() => setSearchTerm('funny')}
+                className="px-3 py-1.5 bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 rounded-full text-xs sm:text-sm transition-all border border-purple-400/30"
+              >
+                funny
+              </button>
+            </div>
           </div>
         </div>
 
@@ -1343,9 +1410,13 @@ const App = () => {
                 {videoId && (
                   <div className="relative aspect-video bg-black group cursor-pointer">
                     <img 
-                      src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+                      src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`}
                       alt={clip.title}
                       className="w-full h-full object-cover"
+                      onError={(e) => {
+                        // Fallback to default thumbnail if maxresdefault doesn't exist
+                        e.target.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
