@@ -1,10 +1,16 @@
-import React, { useState, useMemo } from 'react';
-import { Search, Copy, Play, Share2, Clock, Film, Sparkles, Zap } from 'lucide-react';
+import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
+import { Search, Copy, Play, Clock, X, Shuffle, Check, ArrowUp, Flame, Swords, Laugh, Heart, Mic, Clapperboard } from 'lucide-react';
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [copiedId, setCopiedId] = useState(null);
-  const [shareMessage, setShareMessage] = useState('');
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [justCopiedToast, setJustCopiedToast] = useState(null);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [randomClip, setRandomClip] = useState(null);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const searchRef = useRef(null);
 
   const clips = [
     {
@@ -1249,35 +1255,22 @@ const App = () => {
     }
   ];
 
+  // ── CATEGORIES ──
+  const categories = [
+    { id: 'funny', label: 'Comedy', icon: 'Laugh', color: 'from-amber-500 to-orange-500', keywords: ['funny', 'absurd', 'comedy', 'awkward', 'hilarious', 'wtf', 'roast', 'sarcastic'] },
+    { id: 'epic', label: 'Epic', icon: 'Swords', color: 'from-red-500 to-rose-600', keywords: ['epic', 'badass', 'battle', 'intense', 'action', 'cool'] },
+    { id: 'motivational', label: 'Hype', icon: 'Flame', color: 'from-emerald-500 to-teal-500', keywords: ['motivational', 'inspirational', 'speech', 'hype', 'perseverance'] },
+    { id: 'emotional', label: 'Feels', icon: 'Heart', color: 'from-pink-500 to-rose-400', keywords: ['emotional', 'touching', 'wholesome', 'sad', 'love', 'friendship', 'crying'] },
+    { id: 'iconic', label: 'Iconic', icon: 'Mic', color: 'from-violet-500 to-purple-600', keywords: ['iconic', 'meme', 'viral', 'legendary'] },
+  ];
+
+  const categoryIcons = { Laugh, Swords, Flame, Heart, Mic };
+
+  // ── HELPERS ──
   const formatDuration = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return mins > 0 ? `${mins}:${secs.toString().padStart(2, '0')}` : `${secs}s`;
-  };
-
-  const filteredClips = useMemo(() => {
-    if (!searchTerm) return clips;
-    
-    const search = searchTerm.toLowerCase();
-    return clips.filter(clip => 
-      clip.title.toLowerCase().includes(search) ||
-      clip.quote.toLowerCase().includes(search) ||
-      clip.tags.some(tag => tag.toLowerCase().includes(search))
-    );
-  }, [searchTerm]);
-
-  const copyToClipboard = (clip) => {
-    const timestampUrl = `${clip.url}&t=${clip.start}s`;
-    navigator.clipboard.writeText(timestampUrl);
-    setCopiedId(clip.id);
-    setTimeout(() => setCopiedId(null), 2000);
-  };
-
-  const shareApp = () => {
-    const shareUrl = window.location.href;
-    navigator.clipboard.writeText(shareUrl);
-    setShareMessage('Link copied! Share SceneClips with your friends');
-    setTimeout(() => setShareMessage(''), 3000);
   };
 
   const getYouTubeId = (url) => {
@@ -1285,222 +1278,339 @@ const App = () => {
     return match ? match[1] : null;
   };
 
+  const getMovieName = (title) => title.split(' - ')[0] || title;
+  const getSceneName = (title) => title.split(' - ')[1] || title;
+
+  const buildTimestampUrl = (clip) => {
+    return `${clip.url}${clip.url.includes('?') ? '&' : '?'}t=${clip.start}s`;
+  };
+
+  // ── FILTERING ──
+  const filteredClips = useMemo(() => {
+    let result = clips;
+    
+    if (activeCategory) {
+      const cat = categories.find(c => c.id === activeCategory);
+      if (cat) {
+        result = result.filter(clip =>
+          clip.tags.some(tag => cat.keywords.some(kw => tag.toLowerCase().includes(kw)))
+        );
+      }
+    }
+    
+    if (searchTerm) {
+      const search = searchTerm.toLowerCase();
+      const searchNoSpaces = search.replace(/\s+/g, '');
+      const searchWords = search.split(/\s+/).filter(w => w.length > 0);
+      result = result.filter(clip => {
+        const titleLower = clip.title.toLowerCase();
+        const quoteLower = clip.quote.toLowerCase();
+        const tagsJoined = clip.tags.join(' ').toLowerCase();
+        const tagsNoSpaces = tagsJoined.replace(/\s+/g, '');
+        // Match if: full phrase in title/quote, OR phrase-no-spaces in tags, OR all words appear somewhere
+        return titleLower.includes(search) ||
+          quoteLower.includes(search) ||
+          tagsJoined.includes(search) ||
+          tagsNoSpaces.includes(searchNoSpaces) ||
+          searchWords.every(word => titleLower.includes(word) || quoteLower.includes(word) || tagsJoined.includes(word));
+      });
+    }
+    
+    return result;
+  }, [searchTerm, activeCategory]);
+
+  // ── ACTIONS ──
+  const copyToClipboard = useCallback(async (clip) => {
+    const timestampUrl = buildTimestampUrl(clip);
+    try {
+      await navigator.clipboard.writeText(timestampUrl);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = timestampUrl;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    setCopiedId(clip.id);
+    setJustCopiedToast(getSceneName(clip.title));
+    setTimeout(() => setCopiedId(null), 2000);
+    setTimeout(() => setJustCopiedToast(null), 2500);
+  }, []);
+
+  const getRandomClip = useCallback(() => {
+    const pool = filteredClips.length > 0 ? filteredClips : clips;
+    const clip = pool[Math.floor(Math.random() * pool.length)];
+    setRandomClip(clip);
+  }, [filteredClips]);
+
+  const clearFilters = () => {
+    setSearchTerm('');
+    setActiveCategory(null);
+  };
+
+  // ── SCROLL HANDLING ──
+  useEffect(() => {
+    const handleScroll = () => setShowScrollTop(window.scrollY > 600);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // ── KEYBOARD SHORTCUTS ──
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === '/' && !isSearchFocused) { e.preventDefault(); searchRef.current?.focus(); }
+      if (e.key === 'Escape') { searchRef.current?.blur(); setRandomClip(null); }
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [isSearchFocused]);
+
+  const quickSearches = [
+    { label: 'you shall not pass', emoji: '\u{1F9D9}' },
+    { label: 'are you not entertained', emoji: '\u2694\uFE0F' },
+    { label: 'step brothers', emoji: '\u{1F91D}' },
+    { label: 'motivational', emoji: '\u{1F525}' },
+    { label: 'Will Ferrell', emoji: '\u{1F602}' },
+    { label: "there's a chance", emoji: '\u{1F91E}' },
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
-        {/* Header */}
-        <div className="text-center mb-4 sm:mb-6 md:mb-8">
-          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-2 sm:mb-3 md:mb-4">
-            <Film className="w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14 text-pink-400" />
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight">FindSceneClips</h1>
+    <div className="min-h-screen bg-zinc-950 text-white" style={{ fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif" }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap');
+        * { -webkit-tap-highlight-color: transparent; }
+        .card-hover { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-hover:hover { transform: translateY(-2px); }
+        .card-hover:active { transform: scale(0.98); }
+        .toast-enter { animation: toastSlide 0.3s cubic-bezier(0.4, 0, 0.2, 1), toastFade 0.4s ease 2.1s forwards; }
+        @keyframes toastSlide { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes toastFade { to { opacity: 0; transform: translateY(-10px); } }
+        .fade-in { animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .pulse-ring { animation: pulseRing 2s ease-out infinite; }
+        @keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(251, 146, 60, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(251, 146, 60, 0); } 100% { box-shadow: 0 0 0 0 rgba(251, 146, 60, 0); } }
+        .modal-bg { animation: modalBgIn 0.2s ease; }
+        @keyframes modalBgIn { from { opacity: 0; } to { opacity: 1; } }
+        .modal-card { animation: modalCardIn 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes modalCardIn { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        input::placeholder { color: rgba(161, 161, 170, 0.6); }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
+
+      {/* TOAST NOTIFICATION */}
+      {justCopiedToast && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 toast-enter">
+          <div className="flex items-center gap-2 bg-emerald-500 text-white px-4 py-2.5 rounded-full shadow-lg shadow-emerald-500/25 text-sm font-medium">
+            <Check className="w-4 h-4" />
+            <span>Copied! Ready to paste</span>
           </div>
-          <p className="text-purple-200 text-sm sm:text-base md:text-lg mb-3 sm:mb-4 px-4">
-            Find the perfect movie moment in seconds
-          </p>
+        </div>
+      )}
 
-          {/* Why and How Section */}
-          <div className="max-w-4xl mx-auto mb-6 sm:mb-8 px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              {/* Why */}
-              <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 sm:p-5 border border-purple-400/20">
-                <div className="flex items-center gap-2 mb-2">
-                  <Sparkles className="w-5 h-5 text-pink-400" />
-                  <h3 className="text-white font-semibold text-base sm:text-lg">Why Use This?</h3>
+      {/* RANDOM CLIP MODAL */}
+      {randomClip && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg"
+          style={{ backgroundColor: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)' }}
+          onClick={() => setRandomClip(null)}
+        >
+          <div className="modal-card max-w-md w-full" onClick={e => e.stopPropagation()}>
+            <div className="bg-zinc-900 rounded-2xl border border-zinc-700 overflow-hidden shadow-2xl">
+              {getYouTubeId(randomClip.url) && (
+                <a href={buildTimestampUrl(randomClip)} target="_blank" rel="noopener noreferrer" className="block relative aspect-video bg-zinc-800 group">
+                  <img
+                    src={`https://img.youtube.com/vi/${getYouTubeId(randomClip.url)}/mqdefault.jpg`}
+                    alt={randomClip.title}
+                    className="w-full h-full object-cover"
+                    onError={(e) => { e.target.src = `https://img.youtube.com/vi/${getYouTubeId(randomClip.url)}/hqdefault.jpg`; }}
+                  />
+                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors">
+                    <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur flex items-center justify-center">
+                      <Play className="w-8 h-8 text-white ml-1" fill="white" />
+                    </div>
+                  </div>
+                </a>
+              )}
+              <div className="p-5">
+                <p className="text-orange-400 text-xs font-semibold uppercase tracking-wider mb-1">{getMovieName(randomClip.title)}</p>
+                <h3 className="text-white text-lg font-bold mb-2">{getSceneName(randomClip.title)}</h3>
+                <p className="text-zinc-400 text-sm italic mb-4 line-clamp-2">&ldquo;{randomClip.quote}&rdquo;</p>
+                <div className="flex gap-2">
+                  <button onClick={() => copyToClipboard(randomClip)} className={`flex-1 py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all text-sm font-semibold active:scale-95 ${copiedId === randomClip.id ? 'bg-emerald-500 text-white' : 'bg-orange-500 hover:bg-orange-400 text-white'}`}>
+                    {copiedId === randomClip.id ? <><Check className="w-4 h-4" /> Copied!</> : <><Copy className="w-4 h-4" /> Copy Link</>}
+                  </button>
+                  <button onClick={() => { setRandomClip(null); setTimeout(getRandomClip, 50); }} className="bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-white px-4 py-2.5 rounded-xl flex items-center gap-2 transition-all text-sm">
+                    <Shuffle className="w-4 h-4" /> Next
+                  </button>
+                  <button onClick={() => setRandomClip(null)} className="bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-white px-3 py-2.5 rounded-xl transition-all">
+                    <X className="w-4 h-4" />
+                  </button>
                 </div>
-                <p className="text-purple-200 text-sm sm:text-base leading-relaxed">
-                  Tired of searching YouTube for that perfect movie clip to text your friends? We've got 124+ iconic moments with direct timestamp links ready to share.
-                </p>
-              </div>
-
-              {/* How */}
-              <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 sm:p-5 border border-purple-400/20">
-                <div className="flex items-center gap-2 mb-2">
-                  <Zap className="w-5 h-5 text-pink-400" />
-                  <h3 className="text-white font-semibold text-base sm:text-lg">How It Works</h3>
-                </div>
-                <p className="text-purple-200 text-sm sm:text-base leading-relaxed">
-                  Search by quote, movie, actor, or emotion. Click "Copy Link" and text it to anyone. The link jumps straight to the moment.
-                </p>
               </div>
             </div>
           </div>
+        </div>
+      )}
 
-          <button
-            onClick={shareApp}
-            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-3 sm:px-4 py-2 rounded-lg transition-all text-sm sm:text-base active:scale-95"
-          >
-            <Share2 className="w-4 h-4" />
-            Share FindSceneClips
-          </button>
-          {shareMessage && (
-            <div className="mt-2 sm:mt-3 text-green-300 text-xs sm:text-sm font-medium">{shareMessage}</div>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* HERO */}
+        <div className="pt-6 sm:pt-10 pb-2">
+          <div className="text-center mb-5 sm:mb-7">
+            <div className="inline-flex items-center gap-2.5 mb-2">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-lg shadow-orange-500/20">
+                <Clapperboard className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Find<span className="text-orange-400">Scene</span>Clips</h1>
+            </div>
+            <p className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-md mx-auto">Better than GIFs! Search iconic media moments.<br />Copy the link and text it to your friends.</p>
+          </div>
+
+          {/* SEARCH BAR */}
+          <div className="relative max-w-2xl mx-auto mb-4">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 w-5 h-5 pointer-events-none" />
+            <input
+              ref={searchRef}
+              type="text"
+              placeholder="Search quotes, movies, actors, emotions..."
+              value={searchTerm}
+              onChange={(e) => { setSearchTerm(e.target.value); setHasInteracted(true); }}
+              onFocus={() => setIsSearchFocused(true)}
+              onBlur={() => setIsSearchFocused(false)}
+              className="w-full pl-12 pr-12 py-3.5 sm:py-4 bg-zinc-900 border border-zinc-800 rounded-2xl text-white text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 transition-all placeholder:text-zinc-600"
+            />
+            {searchTerm && (
+              <button onClick={() => setSearchTerm('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white transition-colors">
+                <X className="w-5 h-5" />
+              </button>
+            )}
+            {!searchTerm && !isSearchFocused && (
+              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-700 text-xs font-mono hidden sm:block">/</span>
+            )}
+          </div>
+
+          {/* QUICK SEARCHES */}
+          {!searchTerm && !activeCategory && (
+            <div className="max-w-2xl mx-auto mb-5 fade-in">
+              <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+                {quickSearches.map((qs) => (
+                  <button key={qs.label} onClick={() => { setSearchTerm(qs.label); setHasInteracted(true); }}
+                    className="px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-white rounded-full text-xs sm:text-sm transition-all active:scale-95">
+                    <span className="mr-1">{qs.emoji}</span> {qs.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* CATEGORY PILLS */}
+          <div className="max-w-2xl mx-auto mb-4 sm:mb-6">
+            <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-1 justify-center flex-wrap">
+              {categories.map((cat) => {
+                const Icon = categoryIcons[cat.icon];
+                const isActive = activeCategory === cat.id;
+                return (
+                  <button key={cat.id} onClick={() => { setActiveCategory(isActive ? null : cat.id); setHasInteracted(true); }}
+                    className={`flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all active:scale-95 whitespace-nowrap ${isActive ? `bg-gradient-to-r ${cat.color} text-white shadow-lg` : 'bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700'}`}>
+                    <Icon className="w-3.5 h-3.5" />
+                    {cat.label}
+                  </button>
+                );
+              })}
+              <button onClick={getRandomClip}
+                className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-zinc-900 border border-orange-500/30 text-orange-400 hover:bg-orange-500/10 hover:border-orange-500/50 transition-all active:scale-95 whitespace-nowrap pulse-ring">
+                <Shuffle className="w-3.5 h-3.5" /> Surprise Me
+              </button>
+            </div>
+          </div>
+
+          {/* ACTIVE FILTER */}
+          {(searchTerm || activeCategory) && (
+            <div className="text-center mb-4 fade-in">
+              <div className="inline-flex items-center gap-2 text-sm">
+                <span className="text-zinc-500">{filteredClips.length} {filteredClips.length === 1 ? 'clip' : 'clips'} found</span>
+                <button onClick={clearFilters} className="text-orange-400 hover:text-orange-300 font-medium transition-colors">Clear</button>
+              </div>
+            </div>
           )}
         </div>
 
-        {/* Search */}
-        <div className="mb-6 sm:mb-8 md:mb-10">
-          <div className="relative max-w-4xl mx-auto">
-            <Search className="absolute left-4 sm:left-6 top-1/2 transform -translate-y-1/2 text-purple-300 w-5 h-5 sm:w-6 sm:h-6" />
-            <input
-              type="text"
-              placeholder="Search by quote, movie, actor, or emotion..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 sm:pl-16 pr-4 sm:pr-6 py-5 sm:py-6 md:py-7 bg-white/10 backdrop-blur-md border-2 border-purple-400/30 rounded-2xl text-white placeholder-purple-300/70 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-base sm:text-lg md:text-xl transition-all shadow-lg"
-            />
-          </div>
-          
-          {/* Example Searches */}
-          <div className="max-w-4xl mx-auto mt-3 sm:mt-4 text-center">
-            <p className="text-purple-300 text-xs sm:text-sm mb-2">
-              <span className="font-medium">Try searching:</span>
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              <button
-                onClick={() => setSearchTerm('gladiator')}
-                className="px-3 py-1.5 bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 rounded-full text-xs sm:text-sm transition-all border border-purple-400/30"
-              >
-                gladiator
-              </button>
-              <button
-                onClick={() => setSearchTerm('freedom')}
-                className="px-3 py-1.5 bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 rounded-full text-xs sm:text-sm transition-all border border-purple-400/30"
-              >
-                freedom
-              </button>
-              <button
-                onClick={() => setSearchTerm('will ferrell')}
-                className="px-3 py-1.5 bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 rounded-full text-xs sm:text-sm transition-all border border-purple-400/30"
-              >
-                Will Ferrell
-              </button>
-              <button
-                onClick={() => setSearchTerm('motivational')}
-                className="px-3 py-1.5 bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 rounded-full text-xs sm:text-sm transition-all border border-purple-400/30"
-              >
-                motivational
-              </button>
-              <button
-                onClick={() => setSearchTerm('funny')}
-                className="px-3 py-1.5 bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 rounded-full text-xs sm:text-sm transition-all border border-purple-400/30"
-              >
-                funny
-              </button>
+        {/* FIRST VISIT HINT */}
+        {!hasInteracted && !searchTerm && !activeCategory && (
+          <div className="text-center mb-6 fade-in">
+            <div className="inline-flex items-center gap-2 bg-zinc-900/50 border border-zinc-800 rounded-2xl px-4 sm:px-5 py-3 text-xs sm:text-sm flex-wrap justify-center">
+              <span className="text-zinc-500">Search a quote, pick a category, or hit</span>
+              <span className="text-orange-400 font-medium">Surprise Me</span>
             </div>
           </div>
-        </div>
+        )}
 
-        {/* Results Count */}
-        <div className="text-center mb-4 sm:mb-6">
-          <p className="text-purple-200 text-sm sm:text-base">
-            {filteredClips.length} {filteredClips.length === 1 ? 'clip' : 'clips'} found
-          </p>
-        </div>
-
-        {/* Clips Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+        {/* CLIPS GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 pb-8">
           {filteredClips.map((clip) => {
             const videoId = getYouTubeId(clip.url);
+            const isCopied = copiedId === clip.id;
             return (
-              <div 
-                key={clip.id} 
-                className="bg-white/10 backdrop-blur-md rounded-xl overflow-hidden border border-purple-400/30 hover:border-purple-400/60 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-              >
-                {/* Thumbnail */}
+              <div key={clip.id} className="card-hover bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800 hover:border-zinc-700 group">
                 {videoId && (
-                  <div className="relative aspect-video bg-black group cursor-pointer">
-                    <img 
-                      src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`}
-                      alt={clip.title}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        // Fallback to default thumbnail if maxresdefault doesn't exist
-                        e.target.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Play className="w-12 h-12 sm:w-16 sm:h-16 text-white drop-shadow-lg" />
+                  <a href={buildTimestampUrl(clip)} target="_blank" rel="noopener noreferrer" className="block relative aspect-video bg-zinc-800">
+                    <img src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`} alt={clip.title} className="w-full h-full object-cover" loading="lazy"
+                      onError={(e) => { e.target.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`; }} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        <Play className="w-6 h-6 text-white ml-0.5" fill="white" />
+                      </div>
                     </div>
-                    {/* Duration Badge */}
-                    <div className="absolute bottom-2 right-2 bg-black/80 px-2 py-1 rounded text-white text-xs sm:text-sm flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      {formatDuration(clip.duration)}
+                    <div className="absolute bottom-2 right-2 bg-black/80 backdrop-blur-sm px-2 py-0.5 rounded-md text-white text-xs flex items-center gap-1 font-mono">
+                      <Clock className="w-3 h-3" />{formatDuration(clip.duration)}
                     </div>
-                  </div>
+                    <div className="absolute bottom-2 left-2">
+                      <span className="text-orange-300 text-xs font-semibold uppercase tracking-wide drop-shadow-lg">{getMovieName(clip.title)}</span>
+                    </div>
+                  </a>
                 )}
-                
-                {/* Content */}
-                <div className="p-3 sm:p-4 md:p-5">
-                  <h3 className="text-white font-semibold text-sm sm:text-base md:text-lg mb-2 line-clamp-2">{clip.title}</h3>
-                  <p className="text-purple-200 text-xs sm:text-sm italic mb-3 line-clamp-2">"{clip.quote}"</p>
-                  
-                  {/* Tags - Show fewer on mobile */}
-                  <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4 max-h-16 sm:max-h-20 overflow-hidden">
-                    {clip.tags.slice(0, 6).map((tag, idx) => (
-                      <span 
-                        key={idx} 
-                        className="text-[10px] sm:text-xs bg-purple-500/30 text-purple-200 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {clip.tags.length > 6 && (
-                      <span className="text-[10px] sm:text-xs text-purple-300">
-                        +{clip.tags.length - 6}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Actions */}
-                  <div className="flex gap-2 sm:gap-3">
-                    <button
-                      onClick={() => copyToClipboard(clip)}
-                      className="flex-1 bg-purple-600 hover:bg-purple-700 active:scale-95 text-white px-3 sm:px-4 py-2 rounded-lg flex items-center justify-center gap-1 sm:gap-2 transition-all text-xs sm:text-sm font-medium"
-                    >
-                      {copiedId === clip.id ? (
-                        <span className="flex items-center gap-1">
-                          <span className="text-green-300">âœ“</span> Copied!
-                        </span>
-                      ) : (
-                        <>
-                          <Copy className="w-3 h-3 sm:w-4 sm:h-4" />
-                          <span className="hidden xs:inline">Copy Link</span>
-                          <span className="xs:hidden">Copy</span>
-                        </>
-                      )}
-                    </button>
-                    <a
-                      href={`${clip.url}&t=${clip.start}s`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-white/10 hover:bg-white/20 active:scale-95 text-white px-3 sm:px-4 py-2 rounded-lg flex items-center justify-center gap-1 sm:gap-2 transition-all text-xs sm:text-sm"
-                    >
-                      <Play className="w-3 h-3 sm:w-4 sm:h-4" />
-                      <span className="hidden sm:inline">Watch</span>
-                    </a>
-                  </div>
+                <div className="p-3.5 sm:p-4">
+                  <h3 className="text-white font-semibold text-sm sm:text-base mb-1.5 leading-snug">{getSceneName(clip.title)}</h3>
+                  <p className="text-zinc-500 text-xs sm:text-sm italic mb-3 line-clamp-2 leading-relaxed">&ldquo;{clip.quote}&rdquo;</p>
+                  <button onClick={() => copyToClipboard(clip)}
+                    className={`w-full py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all text-sm font-semibold active:scale-95 ${isCopied ? 'bg-emerald-500 text-white' : 'bg-zinc-800 hover:bg-orange-500 text-zinc-300 hover:text-white border border-zinc-700 hover:border-orange-500'}`}>
+                    {isCopied ? <><Check className="w-4 h-4" /> Copied — paste it!</> : <><Copy className="w-4 h-4" /> Copy Link to Send</>}
+                  </button>
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* No Results */}
+        {/* NO RESULTS */}
         {filteredClips.length === 0 && (
-          <div className="text-center py-12 sm:py-16">
-            <p className="text-purple-300 text-lg sm:text-xl mb-2">No clips found</p>
-            <p className="text-purple-400 text-sm">Try a different search term</p>
+          <div className="text-center py-16 fade-in">
+            <div className="text-4xl mb-3">{'\u{1F3AC}'}</div>
+            <p className="text-zinc-400 text-lg mb-1">No clips match that search</p>
+            <p className="text-zinc-600 text-sm mb-4">Try a different movie, quote, or emotion</p>
+            <button onClick={clearFilters} className="text-orange-400 hover:text-orange-300 text-sm font-medium transition-colors">Clear search</button>
           </div>
         )}
 
-        {/* Footer */}
-        <div className="text-center mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-purple-400/20">
-          <p className="text-purple-300 text-xs sm:text-sm">
-            Built for texting friends, creating content, and reliving iconic moments
-          </p>
+        {/* FOOTER */}
+        <div className="text-center py-8 border-t border-zinc-900">
+          <p className="text-zinc-600 text-xs sm:text-sm">{clips.length} iconic moments and counting</p>
+          <p className="text-zinc-700 text-xs mt-1">FindSceneClips.com</p>
         </div>
       </div>
+
+      {/* SCROLL TO TOP */}
+      {showScrollTop && (
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="fixed bottom-6 right-6 z-40 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-xl transition-all active:scale-90 fade-in">
+          <ArrowUp className="w-4 h-4" />
+        </button>
+      )}
     </div>
   );
 };
