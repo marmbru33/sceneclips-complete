@@ -9,7 +9,6 @@ const App = () => {
   const [justCopiedToast, setJustCopiedToast] = useState(null);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [randomClip, setRandomClip] = useState(null);
-  const [hasInteracted, setHasInteracted] = useState(false);
   const searchRef = useRef(null);
 
   const clips = [
@@ -1368,15 +1367,6 @@ const App = () => {
     return () => window.removeEventListener('keydown', handleKey);
   }, [isSearchFocused]);
 
-  const quickSearches = [
-    { label: 'you shall not pass', emoji: '\u{1F9D9}' },
-    { label: 'are you not entertained', emoji: '\u2694\uFE0F' },
-    { label: 'step brothers', emoji: '\u{1F91D}' },
-    { label: 'motivational', emoji: '\u{1F525}' },
-    { label: 'Will Ferrell', emoji: '\u{1F602}' },
-    { label: "there's a chance", emoji: '\u{1F91E}' },
-  ];
-
   return (
     <div className="min-h-screen bg-zinc-950 text-white" style={{ fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif" }}>
       <style>{`
@@ -1458,30 +1448,31 @@ const App = () => {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* HERO */}
-        <div className="pt-6 sm:pt-10 pb-2">
-          <div className="text-center mb-5 sm:mb-7">
-            <div className="inline-flex items-center gap-2.5 mb-2">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-lg shadow-orange-500/20">
-                <Clapperboard className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+        {/* ── HERO: Search-dominant, everything above the fold on mobile ── */}
+        <div className="pt-4 sm:pt-8 pb-1">
+          {/* Logo + Tagline — compact */}
+          <div className="text-center mb-3 sm:mb-5">
+            <div className="inline-flex items-center gap-2 mb-1.5">
+              <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center">
+                <Clapperboard className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 text-white" />
               </div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Find<span className="text-orange-400">Scene</span>Clips</h1>
+              <h1 className="text-xl sm:text-3xl font-bold tracking-tight">Find<span className="text-orange-400">Scene</span>Clips</h1>
             </div>
-            <p className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-md mx-auto">Better than GIFs! Search iconic media moments.<br />Copy the link and text it to your friends.</p>
+            <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed max-w-sm mx-auto">Better than GIFs! Search iconic media moments.<br />Copy the link and text it to your friends.</p>
           </div>
 
-          {/* SEARCH BAR */}
-          <div className="relative max-w-2xl mx-auto mb-4">
+          {/* SEARCH BAR — the hero element */}
+          <div className="relative max-w-xl mx-auto mb-3 sm:mb-4">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 w-5 h-5 pointer-events-none" />
             <input
               ref={searchRef}
               type="text"
-              placeholder="Search quotes, movies, actors, emotions..."
+              placeholder='Try "you shall not pass" or "Will Ferrell"'
               value={searchTerm}
-              onChange={(e) => { setSearchTerm(e.target.value); setHasInteracted(true); }}
+              onChange={(e) => { setSearchTerm(e.target.value); }}
               onFocus={() => setIsSearchFocused(true)}
               onBlur={() => setIsSearchFocused(false)}
-              className="w-full pl-12 pr-12 py-3.5 sm:py-4 bg-zinc-900 border border-zinc-800 rounded-2xl text-white text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 transition-all placeholder:text-zinc-600"
+              className="w-full pl-12 pr-12 py-4 sm:py-4.5 bg-zinc-900 border-2 border-zinc-700 rounded-2xl text-white text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 transition-all placeholder:text-zinc-600"
             />
             {searchTerm && (
               <button onClick={() => setSearchTerm('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white transition-colors">
@@ -1493,61 +1484,39 @@ const App = () => {
             )}
           </div>
 
-          {/* QUICK SEARCHES */}
-          {!searchTerm && !activeCategory && (
-            <div className="max-w-2xl mx-auto mb-5 fade-in">
-              <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2">
-                {quickSearches.map((qs) => (
-                  <button key={qs.label} onClick={() => { setSearchTerm(qs.label); setHasInteracted(true); }}
-                    className="px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-white rounded-full text-xs sm:text-sm transition-all active:scale-95">
-                    <span className="mr-1">{qs.emoji}</span> {qs.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* CATEGORY PILLS */}
-          <div className="max-w-2xl mx-auto mb-4 sm:mb-6">
-            <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide pb-1 justify-center flex-wrap">
+          {/* CATEGORY + SURPRISE — single compact row */}
+          <div className="max-w-xl mx-auto mb-3 sm:mb-4">
+            <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-hide pb-0.5 justify-center flex-wrap">
               {categories.map((cat) => {
                 const Icon = categoryIcons[cat.icon];
                 const isActive = activeCategory === cat.id;
                 return (
-                  <button key={cat.id} onClick={() => { setActiveCategory(isActive ? null : cat.id); setHasInteracted(true); }}
-                    className={`flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all active:scale-95 whitespace-nowrap ${isActive ? `bg-gradient-to-r ${cat.color} text-white shadow-lg` : 'bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700'}`}>
-                    <Icon className="w-3.5 h-3.5" />
+                  <button key={cat.id} onClick={() => { setActiveCategory(isActive ? null : cat.id); }}
+                    className={`flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-medium transition-all active:scale-95 whitespace-nowrap ${isActive ? `bg-gradient-to-r ${cat.color} text-white shadow-lg` : 'bg-zinc-900 border border-zinc-800 text-zinc-500 hover:text-white hover:border-zinc-700'}`}>
+                    <Icon className="w-3 h-3" />
                     {cat.label}
                   </button>
                 );
               })}
               <button onClick={getRandomClip}
-                className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-zinc-900 border border-orange-500/30 text-orange-400 hover:bg-orange-500/10 hover:border-orange-500/50 transition-all active:scale-95 whitespace-nowrap pulse-ring">
-                <Shuffle className="w-3.5 h-3.5" /> Surprise Me
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-medium bg-zinc-900 border border-orange-500/30 text-orange-400 hover:bg-orange-500/10 transition-all active:scale-95 whitespace-nowrap pulse-ring">
+                <Shuffle className="w-3 h-3" /> Surprise Me
               </button>
             </div>
           </div>
 
-          {/* ACTIVE FILTER */}
-          {(searchTerm || activeCategory) && (
-            <div className="text-center mb-4 fade-in">
-              <div className="inline-flex items-center gap-2 text-sm">
-                <span className="text-zinc-500">{filteredClips.length} {filteredClips.length === 1 ? 'clip' : 'clips'} found</span>
+          {/* ACTIVE FILTER or CLIP COUNT */}
+          <div className="text-center mb-2">
+            {(searchTerm || activeCategory) ? (
+              <div className="inline-flex items-center gap-2 text-xs sm:text-sm fade-in">
+                <span className="text-zinc-500">{filteredClips.length} {filteredClips.length === 1 ? 'clip' : 'clips'}</span>
                 <button onClick={clearFilters} className="text-orange-400 hover:text-orange-300 font-medium transition-colors">Clear</button>
               </div>
-            </div>
-          )}
-        </div>
-
-        {/* FIRST VISIT HINT */}
-        {!hasInteracted && !searchTerm && !activeCategory && (
-          <div className="text-center mb-6 fade-in">
-            <div className="inline-flex items-center gap-2 bg-zinc-900/50 border border-zinc-800 rounded-2xl px-4 sm:px-5 py-3 text-xs sm:text-sm flex-wrap justify-center">
-              <span className="text-zinc-500">Search a quote, pick a category, or hit</span>
-              <span className="text-orange-400 font-medium">Surprise Me</span>
-            </div>
+            ) : (
+              <p className="text-zinc-700 text-xs">{clips.length} clips</p>
+            )}
           </div>
-        )}
+        </div>
 
         {/* CLIPS GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 pb-8">
