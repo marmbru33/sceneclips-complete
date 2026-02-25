@@ -1448,28 +1448,30 @@ const App = () => {
 
       <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
 
-        {/* ── HERO: Tagline-forward, search at thumb-reach, above the fold ── */}
-        <div className="pt-3 sm:pt-8">
-          {/* Logo — small, just branding */}
-          <div className="text-center mb-4 sm:mb-5">
-            <div className="inline-flex items-center gap-2 mb-4 sm:mb-5">
-              <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center">
-                <Clapperboard className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-white" />
-              </div>
-              <h1 className="text-lg sm:text-3xl font-bold tracking-tight">Find<span className="text-orange-400">Scene</span>Clips</h1>
+        {/* ── HERO: Google-style. Full screen when idle, compact when searching ── */}
+        <div className={`flex flex-col items-center justify-center transition-all duration-300 ${(searchTerm || activeCategory) ? '' : ''}`} style={{ minHeight: (searchTerm || activeCategory) ? 'auto' : '85vh', paddingTop: (searchTerm || activeCategory) ? '24px' : '0' }}>
+          {/* Logo — small branding */}
+          <div className={`inline-flex items-center gap-2 transition-all duration-300 ${(searchTerm || activeCategory) ? 'mb-3' : 'mb-5 sm:mb-6'}`}>
+            <div className={`rounded-lg bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center transition-all duration-300 ${(searchTerm || activeCategory) ? 'w-6 h-6' : 'w-8 h-8 sm:w-10 sm:h-10'}`}>
+              <Clapperboard className={`text-white transition-all duration-300 ${(searchTerm || activeCategory) ? 'w-3 h-3' : 'w-4 h-4 sm:w-5 sm:h-5'}`} />
             </div>
-
-            {/* Tagline — THE billboard, big and bold */}
-            <p className="text-white text-lg sm:text-2xl font-semibold leading-snug max-w-sm sm:max-w-lg mx-auto mb-1">
-              Better than GIFs!
-            </p>
-            <p className="text-zinc-400 text-sm sm:text-lg leading-relaxed max-w-sm sm:max-w-lg mx-auto">
-              Search iconic media moments.<br className="sm:hidden" />{' '}Copy the link and text it to your friends.
-            </p>
+            <h1 className={`font-bold tracking-tight transition-all duration-300 ${(searchTerm || activeCategory) ? 'text-base sm:text-xl' : 'text-xl sm:text-3xl'}`}>Find<span className="text-orange-400">Scene</span>Clips</h1>
           </div>
 
-          {/* SEARCH BAR — pushed down for thumb reach */}
-          <div className="relative max-w-xl mx-auto mb-3 sm:mb-4">
+          {/* Tagline — THE billboard. Hides when searching. */}
+          {!(searchTerm || activeCategory) && (
+            <div className="text-center mb-6 sm:mb-8 fade-in">
+              <p className="text-white text-2xl sm:text-4xl font-bold leading-tight mb-2 sm:mb-3">
+                Better than GIFs!
+              </p>
+              <p className="text-zinc-400 text-sm sm:text-lg leading-relaxed max-w-xs sm:max-w-lg mx-auto">
+                Search iconic media moments.<br />Copy the video hyperlink and text it to your friends.
+              </p>
+            </div>
+          )}
+
+          {/* SEARCH BAR — the centerpiece */}
+          <div className={`relative w-full max-w-xl transition-all duration-300 ${(searchTerm || activeCategory) ? 'mb-3' : 'mb-5 sm:mb-6'}`}>
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 w-5 h-5 pointer-events-none" />
             <input
               ref={searchRef}
@@ -1491,8 +1493,8 @@ const App = () => {
             )}
           </div>
 
-          {/* CATEGORY + SURPRISE — single compact row */}
-          <div className="max-w-xl mx-auto mb-2 sm:mb-4">
+          {/* CATEGORY + SURPRISE */}
+          <div className={`w-full max-w-xl transition-all duration-300 ${(searchTerm || activeCategory) ? 'mb-2' : 'mb-4 sm:mb-6'}`}>
             <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-hide pb-0.5 justify-center flex-wrap">
               {categories.map((cat) => {
                 const Icon = categoryIcons[cat.icon];
@@ -1512,7 +1514,7 @@ const App = () => {
             </div>
           </div>
 
-          {/* ACTIVE FILTER or CLIP COUNT */}
+          {/* RESULT COUNT — only when searching */}
           {(searchTerm || activeCategory) && (
             <div className="text-center mb-2 fade-in">
               <div className="inline-flex items-center gap-2 text-xs sm:text-sm">
@@ -1521,53 +1523,55 @@ const App = () => {
               </div>
             </div>
           )}
+
+          {/* EMPTY STATE HINT — only when no search */}
+          {!(searchTerm || activeCategory) && (
+            <p className="text-zinc-700 text-xs sm:text-sm mt-2 fade-in">{clips.length}+ scenes ready to search</p>
+          )}
         </div>
 
-        {/* CLIPS GRID — 2 cols on mobile, 3 on tablet, 4 on desktop */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 pb-8">
-          {filteredClips.map((clip) => {
-            const videoId = getYouTubeId(clip.url);
-            const isCopied = copiedId === clip.id;
-            return (
-              <div key={clip.id} className="card-hover bg-zinc-900 rounded-lg sm:rounded-xl overflow-hidden border border-zinc-800 hover:border-zinc-700 group">
-                {/* Thumbnail — shorter aspect ratio on mobile */}
-                {videoId && (
-                  <a href={buildTimestampUrl(clip)} target="_blank" rel="noopener noreferrer" className="block relative bg-zinc-800" style={{ aspectRatio: '16/10' }}>
-                    <img src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`} alt={clip.title} className="w-full h-full object-cover" loading="lazy"
-                      onError={(e) => { e.target.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`; }} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    {/* Play icon — smaller on mobile */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                        <Play className="w-4 h-4 sm:w-5 sm:h-5 text-white ml-0.5" fill="white" />
+        {/* CLIPS GRID — only visible when user searches or picks a category */}
+        {(searchTerm || activeCategory) && (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 pb-8 fade-in">
+            {filteredClips.map((clip) => {
+              const videoId = getYouTubeId(clip.url);
+              const isCopied = copiedId === clip.id;
+              return (
+                <div key={clip.id} className="card-hover bg-zinc-900 rounded-lg sm:rounded-xl overflow-hidden border border-zinc-800 hover:border-zinc-700 group">
+                  {videoId && (
+                    <a href={buildTimestampUrl(clip)} target="_blank" rel="noopener noreferrer" className="block relative bg-zinc-800" style={{ aspectRatio: '16/10' }}>
+                      <img src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`} alt={clip.title} className="w-full h-full object-cover" loading="lazy"
+                        onError={(e) => { e.target.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`; }} />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                          <Play className="w-4 h-4 sm:w-5 sm:h-5 text-white ml-0.5" fill="white" />
+                        </div>
                       </div>
-                    </div>
-                    {/* Duration badge */}
-                    <div className="absolute top-1.5 right-1.5 bg-black/70 px-1.5 py-0.5 rounded text-white text-[10px] sm:text-xs flex items-center gap-0.5 font-mono">
-                      {formatDuration(clip.duration)}
-                    </div>
-                    {/* Movie name + scene name overlay on thumbnail */}
-                    <div className="absolute bottom-1.5 left-1.5 right-1.5">
-                      <p className="text-orange-300 text-[10px] sm:text-xs font-semibold uppercase tracking-wide drop-shadow-lg leading-none mb-0.5">{getMovieName(clip.title)}</p>
-                      <p className="text-white text-xs sm:text-sm font-semibold leading-tight drop-shadow-lg line-clamp-1">{getSceneName(clip.title)}</p>
-                    </div>
-                  </a>
-                )}
-                {/* Content — compact */}
-                <div className="p-2 sm:p-3">
-                  <p className="text-zinc-500 text-[11px] sm:text-xs italic mb-2 line-clamp-2 leading-snug">&ldquo;{clip.quote}&rdquo;</p>
-                  <button onClick={() => copyToClipboard(clip)}
-                    className={`w-full py-2 sm:py-2.5 rounded-lg sm:rounded-xl flex items-center justify-center gap-1.5 transition-all text-xs sm:text-sm font-semibold active:scale-95 ${isCopied ? 'bg-emerald-500 text-white' : 'bg-zinc-800 hover:bg-orange-500 text-zinc-300 hover:text-white border border-zinc-700 hover:border-orange-500'}`}>
-                    {isCopied ? <><Check className="w-3.5 h-3.5" /> Copied!</> : <><Copy className="w-3.5 h-3.5" /> Copy Link</>}
-                  </button>
+                      <div className="absolute top-1.5 right-1.5 bg-black/70 px-1.5 py-0.5 rounded text-white text-[10px] sm:text-xs flex items-center gap-0.5 font-mono">
+                        {formatDuration(clip.duration)}
+                      </div>
+                      <div className="absolute bottom-1.5 left-1.5 right-1.5">
+                        <p className="text-orange-300 text-[10px] sm:text-xs font-semibold uppercase tracking-wide drop-shadow-lg leading-none mb-0.5">{getMovieName(clip.title)}</p>
+                        <p className="text-white text-xs sm:text-sm font-semibold leading-tight drop-shadow-lg line-clamp-1">{getSceneName(clip.title)}</p>
+                      </div>
+                    </a>
+                  )}
+                  <div className="p-2 sm:p-3">
+                    <p className="text-zinc-500 text-[11px] sm:text-xs italic mb-2 line-clamp-2 leading-snug">&ldquo;{clip.quote}&rdquo;</p>
+                    <button onClick={() => copyToClipboard(clip)}
+                      className={`w-full py-2 sm:py-2.5 rounded-lg sm:rounded-xl flex items-center justify-center gap-1.5 transition-all text-xs sm:text-sm font-semibold active:scale-95 ${isCopied ? 'bg-emerald-500 text-white' : 'bg-orange-500 hover:bg-orange-400 text-white'}`}>
+                      {isCopied ? <><Check className="w-3.5 h-3.5" /> Copied!</> : <><Copy className="w-3.5 h-3.5" /> Copy Link</>}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
 
         {/* NO RESULTS */}
-        {filteredClips.length === 0 && (
+        {(searchTerm || activeCategory) && filteredClips.length === 0 && (
           <div className="text-center py-16 fade-in">
             <div className="text-4xl mb-3">{'\u{1F3AC}'}</div>
             <p className="text-zinc-400 text-lg mb-1">No clips match that search</p>
@@ -1576,11 +1580,13 @@ const App = () => {
           </div>
         )}
 
-        {/* FOOTER */}
-        <div className="text-center py-8 border-t border-zinc-900">
-          <p className="text-zinc-600 text-xs sm:text-sm">{clips.length} iconic moments and counting</p>
-          <p className="text-zinc-700 text-xs mt-1">FindSceneClips.com</p>
-        </div>
+        {/* FOOTER — only when results are showing */}
+        {(searchTerm || activeCategory) && filteredClips.length > 0 && (
+          <div className="text-center py-8 border-t border-zinc-900">
+            <p className="text-zinc-600 text-xs sm:text-sm">{clips.length} iconic moments and counting</p>
+            <p className="text-zinc-700 text-xs mt-1">FindSceneClips.com</p>
+          </div>
+        )}
       </div>
 
       {/* SCROLL TO TOP */}
