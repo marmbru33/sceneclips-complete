@@ -1448,30 +1448,31 @@ const App = () => {
 
       <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
 
-        {/* ── HERO: Google-style. Full screen when idle, compact when searching ── */}
-        <div className={`flex flex-col items-center justify-center transition-all duration-300 ${(searchTerm || activeCategory) ? '' : ''}`} style={{ minHeight: (searchTerm || activeCategory) ? 'auto' : '85vh', paddingTop: (searchTerm || activeCategory) ? '24px' : '0' }}>
-          {/* Logo — small branding */}
-          <div className={`inline-flex items-center gap-2 transition-all duration-300 ${(searchTerm || activeCategory) ? 'mb-3' : 'mb-5 sm:mb-6'}`}>
-            <div className={`rounded-lg bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center transition-all duration-300 ${(searchTerm || activeCategory) ? 'w-6 h-6' : 'w-8 h-8 sm:w-10 sm:h-10'}`}>
-              <Clapperboard className={`text-white transition-all duration-300 ${(searchTerm || activeCategory) ? 'w-3 h-3' : 'w-4 h-4 sm:w-5 sm:h-5'}`} />
+        {/* ── HERO: Google-style. Big logo up top, search bar at thumb level ── */}
+        <div className={`flex flex-col items-center transition-all duration-300`} style={{ minHeight: (searchTerm || activeCategory) ? 'auto' : '92vh', justifyContent: (searchTerm || activeCategory) ? 'flex-start' : 'center', paddingTop: (searchTerm || activeCategory) ? '20px' : '0', paddingBottom: (searchTerm || activeCategory) ? '0' : '0' }}>
+
+          {/* Logo — LARGE on landing like Google, compact when searching */}
+          <div className={`inline-flex items-center transition-all duration-300 ${(searchTerm || activeCategory) ? 'gap-2 mb-3' : 'gap-3 mb-4 sm:mb-5'}`}>
+            <div className={`rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-lg shadow-orange-500/20 transition-all duration-300 ${(searchTerm || activeCategory) ? 'w-6 h-6 rounded-lg' : 'w-12 h-12 sm:w-16 sm:h-16'}`}>
+              <Clapperboard className={`text-white transition-all duration-300 ${(searchTerm || activeCategory) ? 'w-3 h-3' : 'w-6 h-6 sm:w-8 sm:h-8'}`} />
             </div>
-            <h1 className={`font-bold tracking-tight transition-all duration-300 ${(searchTerm || activeCategory) ? 'text-base sm:text-xl' : 'text-xl sm:text-3xl'}`}>Find<span className="text-orange-400">Scene</span>Clips</h1>
+            <h1 className={`font-bold tracking-tight transition-all duration-300 ${(searchTerm || activeCategory) ? 'text-base sm:text-xl' : 'text-4xl sm:text-6xl'}`}>Find<span className="text-orange-400">Scene</span>Clips</h1>
           </div>
 
-          {/* Tagline — THE billboard. Hides when searching. */}
+          {/* Tagline — visible only on landing, sized between logo and search */}
           {!(searchTerm || activeCategory) && (
-            <div className="text-center mb-6 sm:mb-8 fade-in">
-              <p className="text-white text-2xl sm:text-4xl font-bold leading-tight mb-2 sm:mb-3">
+            <div className="text-center mb-8 sm:mb-10 fade-in">
+              <p className="text-white text-xl sm:text-2xl font-bold leading-tight mb-2 sm:mb-3">
                 Better than GIFs!
               </p>
-              <p className="text-zinc-400 text-sm sm:text-lg leading-relaxed max-w-xs sm:max-w-lg mx-auto">
+              <p className="text-zinc-400 text-base sm:text-xl leading-relaxed max-w-sm sm:max-w-lg mx-auto">
                 Search iconic media moments.<br />Copy the video hyperlink and text it to your friends.
               </p>
             </div>
           )}
 
-          {/* SEARCH BAR — the centerpiece */}
-          <div className={`relative w-full max-w-xl transition-all duration-300 ${(searchTerm || activeCategory) ? 'mb-3' : 'mb-5 sm:mb-6'}`}>
+          {/* SEARCH BAR — the main action */}
+          <div className={`relative w-full max-w-xl transition-all duration-300 ${(searchTerm || activeCategory) ? 'mb-3' : 'mb-4 sm:mb-5'}`}>
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 w-5 h-5 pointer-events-none" />
             <input
               ref={searchRef}
@@ -1494,7 +1495,7 @@ const App = () => {
           </div>
 
           {/* CATEGORY + SURPRISE */}
-          <div className={`w-full max-w-xl transition-all duration-300 ${(searchTerm || activeCategory) ? 'mb-2' : 'mb-4 sm:mb-6'}`}>
+          <div className={`w-full max-w-xl transition-all duration-300 ${(searchTerm || activeCategory) ? 'mb-2' : 'mb-0'}`}>
             <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-hide pb-0.5 justify-center flex-wrap">
               {categories.map((cat) => {
                 const Icon = categoryIcons[cat.icon];
@@ -1516,17 +1517,12 @@ const App = () => {
 
           {/* RESULT COUNT — only when searching */}
           {(searchTerm || activeCategory) && (
-            <div className="text-center mb-2 fade-in">
+            <div className="text-center mb-2 mt-1 fade-in">
               <div className="inline-flex items-center gap-2 text-xs sm:text-sm">
                 <span className="text-zinc-500">{filteredClips.length} {filteredClips.length === 1 ? 'clip' : 'clips'}</span>
                 <button onClick={clearFilters} className="text-orange-400 hover:text-orange-300 font-medium transition-colors">Clear</button>
               </div>
             </div>
-          )}
-
-          {/* EMPTY STATE HINT — only when no search */}
-          {!(searchTerm || activeCategory) && (
-            <p className="text-zinc-700 text-xs sm:text-sm mt-2 fade-in">{clips.length}+ scenes ready to search</p>
           )}
         </div>
 
