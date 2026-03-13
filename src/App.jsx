@@ -1416,7 +1416,15 @@ const App = () => {
                     src={`https://img.youtube.com/vi/${getYouTubeId(randomClip.url)}/mqdefault.jpg`}
                     alt={randomClip.title}
                     className="w-full h-full object-cover"
-                    onError={(e) => { e.target.src = `https://img.youtube.com/vi/${getYouTubeId(randomClip.url)}/hqdefault.jpg`; }}
+                    onError={(e) => {
+                      if (e.target.src.includes('mqdefault')) {
+                        e.target.src = `https://img.youtube.com/vi/${getYouTubeId(randomClip.url)}/hqdefault.jpg`;
+                      } else if (e.target.src.includes('hqdefault')) {
+                        e.target.src = `https://img.youtube.com/vi/${getYouTubeId(randomClip.url)}/default.jpg`;
+                      } else {
+                        e.target.style.display = 'none';
+                      }
+                    }}
                   />
                   <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors">
                     <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur flex items-center justify-center">
@@ -1537,7 +1545,15 @@ const App = () => {
                   {videoId && (
                     <a href={buildTimestampUrl(clip)} target="_blank" rel="noopener noreferrer" className="block relative bg-zinc-800" style={{ aspectRatio: '16/10' }}>
                       <img src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`} alt={clip.title} className="w-full h-full object-cover" loading="lazy"
-                        onError={(e) => { e.target.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`; }} />
+                        onError={(e) => {
+                          if (e.target.src.includes('mqdefault')) {
+                            e.target.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                          } else if (e.target.src.includes('hqdefault')) {
+                            e.target.src = `https://img.youtube.com/vi/${videoId}/default.jpg`;
+                          } else {
+                            e.target.style.display = 'none';
+                          }
+                        }} />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                         <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
