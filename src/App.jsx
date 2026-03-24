@@ -260,7 +260,7 @@ const App = () => {
         start: 270,
         end: 285,
         duration: 15,
-        tags: ['#stepbrothers', '#crossbows', '#whyareyousosweaty', '#iwatching cops', '#willferrell']
+        tags: ['#stepbrothers', '#crossbows', '#whyareyousosweaty', '#iwatchingcops', '#willferrell']
       },
       {
         id: 26,
@@ -2470,7 +2470,7 @@ const App = () => {
         start: 4560,
         end: 4920,
         duration: 360,
-        tags: ['#princessbride', '#inigomontoya', '#mynameIsinigomontoya', '#mynameisinigomontoya', '#mandy patinkin', '#revenge', '#fencing']
+        tags: ['#princessbride', '#inigomontoya', '#mynameIsinigomontoya', '#mynameisinigomontoya', '#mandypatinkin', '#revenge', '#fencing']
       },
       {
         id: 247,
@@ -2500,7 +2500,7 @@ const App = () => {
         start: 120,
         end: 480,
         duration: 360,
-        tags: ['#gameofthrones', '#shame', '#cersei', '#walkofshame', '#bellshame', '#lena headey']
+        tags: ['#gameofthrones', '#shame', '#cersei', '#walkofshame', '#bellshame', '#lenaheadey']
       },
       {
         id: 250,
@@ -3401,6 +3401,1006 @@ const App = () => {
         end: 480,
         duration: 480,
         tags: ['#montypython', '#spanishinquisition', '#nobodyexpectsthespanishinquisition', '#nobody', '#expects']
+      },
+      {
+        id: 340,
+        title: "Mean Girls - I'm Not a Regular Mom",
+        quote: "I'm not a regular mom, I'm a cool mom",
+        url: "https://www.youtube.com/watch?v=wI9I_jkLIXE",
+        start: 20,
+        end: 23,
+        duration: 3,
+        tags: ['#meangirls', '#iamnotaregularmom', '#imacoolmom', '#coolmom', '#reginargeorge', '#amypoehler', '#lindseylohan', '#iconic', '#meme', '#funny']
+      },
+      {
+        id: 341,
+        title: "Mean Girls - All You Sucker Emcees",
+        quote: "I'm a mouse, duh",
+        url: "https://www.youtube.com/watch?v=3dQSLIOMBgY",
+        start: 1,
+        end: 6,
+        duration: 5,
+        tags: ['#meangirls', '#iamamouse', '#halloween', '#costume', '#lindseylohan', '#funny', '#iconic', '#duh']
+      },
+      {
+        id: 342,
+        title: "Mean Girls - Get in Loser",
+        quote: "Get in loser, we're going shopping",
+        url: "https://www.youtube.com/watch?v=eKUlOEHu7Uc",
+        start: 12,
+        end: 16,
+        duration: 4,
+        tags: ['#meangirls', '#getinloser', '#weregoindshopping', '#reginargeorge', '#rachelmcadams', '#iconic', '#meme', '#viral', '#funny', '#shopping']
+      },
+      {
+        id: 343,
+        title: "Mean Girls - The Limit Does Not Exist",
+        quote: "The limit does not exist!",
+        url: "https://www.youtube.com/watch?v=SaKjhk4P8_o",
+        start: 115,
+        end: 136,
+        duration: 21,
+        tags: ['#meangirls', '#thelimitdoesnotexist', '#cady', '#lindseylohan', '#mathlete', '#iconic', '#meme', '#funny', '#limitless']
+      },
+      {
+        id: 344,
+        title: "Mean Girls - You Go Glen Coco",
+        quote: "You go, Glen Coco!",
+        url: "https://www.youtube.com/watch?v=MeKT22LFvKI",
+        start: 5,
+        end: 10,
+        duration: 5,
+        tags: ['#meangirls', '#yougoglencoco', '#glencoco', '#fourglencocos', '#damian', '#iconic', '#meme', '#funny', '#viral', '#hype']
+      },
+      {
+        id: 345,
+        title: "Mean Girls - Your Mom's Chest Hair",
+        quote: "Your mom's chest hair",
+        url: "https://www.youtube.com/watch?v=UrNt9OeDEX8",
+        start: 5,
+        end: 7,
+        duration: 2,
+        tags: ['#meangirls', '#yourmomschesthair', '#gretchenwieners', '#laceycharbert', '#burn', '#funny', '#roast', '#insult']
+      },
+      {
+        id: 346,
+        title: "The Notebook - I Want All of You Forever",
+        quote: "I want all of you, forever, you and me, every day",
+        url: "https://www.youtube.com/watch?v=rNzimdBJF1s",
+        start: 22,
+        end: 30,
+        duration: 8,
+        tags: ['#thenotebook', '#iwantallofyou', '#forever', '#ryanGosling', '#rachelmcadams', '#romantic', '#love', '#emotional', '#touching']
+      },
+      {
+        id: 347,
+        title: "The Notebook - If You're a Bird",
+        quote: "If you're a bird, I'm a bird",
+        url: "https://www.youtube.com/watch?v=d7_F5P5PygM",
+        start: 52,
+        end: 60,
+        duration: 8,
+        tags: ['#thenotebook', '#ifyoureabird', '#imabird', '#ryangosling', '#rachelmcadams', '#romantic', '#love', '#emotional', '#iconic']
+      },
+      {
+        id: 348,
+        title: "Brooklyn Nine-Nine - Cool Cool Cool",
+        quote: "Cool, cool, cool, cool, cool. No doubt, no doubt, no doubt",
+        url: "https://www.youtube.com/watch?v=i_8uLQM0eyg",
+        start: 11,
+        end: 25,
+        duration: 14,
+        tags: ['#brooklynninenine', '#coolcoolcool', '#nodoubt', '#jakeperalta', '#andysamberg', '#funny', '#awkward', '#nervous', '#meme', '#iconic']
+      },
+      {
+        id: 349,
+        title: "Brooklyn Nine-Nine - NINE-NINE!",
+        quote: "NINE-NINE!",
+        url: "https://www.youtube.com/watch?v=XALXt-1MOSI",
+        start: 4,
+        end: 5,
+        duration: 1,
+        tags: ['#brooklynninenine', '#ninenine', '#squad', '#hype', '#funny', '#iconic', '#legendary', '#celebration']
+      },
+      {
+        id: 350,
+        title: "New Girl - Taylor Swift Alone",
+        quote: "I just wanted to listen to Taylor Swift alone",
+        url: "https://www.youtube.com/watch?v=hhmRMR31li4",
+        start: 4,
+        end: 9,
+        duration: 5,
+        tags: ['#newgirl', '#taylorswift', '#alone', '#jess', '#zoooeydeschanel', '#funny', '#relatable', '#introvert', '#mood']
+      },
+      {
+        id: 351,
+        title: "Clueless - Ugh As If!",
+        quote: "Ugh, as if!",
+        url: "https://www.youtube.com/watch?v=hO1mSf8l6MA",
+        start: 69,
+        end: 74,
+        duration: 5,
+        tags: ['#clueless', '#ughasif', '#asif', '#cher', '#aliciasilverstone', '#iconic', '#meme', '#funny', '#valley', '#90s']
+      },
+      {
+        id: 352,
+        title: "Clueless - It Does Not Say RSVP",
+        quote: "It does not say RSVP on the Statue of Liberty",
+        url: "https://www.youtube.com/watch?v=8toaz_9BHrY",
+        start: 248,
+        end: 257,
+        duration: 9,
+        tags: ['#clueless', '#rsvp', '#statueofliberty', '#cher', '#aliciasilverstone', '#funny', '#iconic', '#debate', '#speeche']
+      },
+      {
+        id: 353,
+        title: "Clueless - Orange is the New Pink",
+        quote: "Whoever said orange is the new pink is seriously disturbed",
+        url: "https://www.youtube.com/watch?v=ivh8YQYOtaY",
+        start: 6,
+        end: 12,
+        duration: 6,
+        tags: ['#clueless', '#orangeisthenewpink', '#cher', '#aliciasilverstone', '#fashion', '#funny', '#iconic', '#90s', '#quote']
+      },
+      {
+        id: 354,
+        title: "Clueless - You're a Virgin Who Can't Drive",
+        quote: "You're a virgin who can't drive",
+        url: "https://www.youtube.com/watch?v=oweYva96e2g",
+        start: 141,
+        end: 146,
+        duration: 5,
+        tags: ['#clueless', '#youreavirgin', '#cantdrive', '#dionne', '#stacydash', '#burn', '#roast', '#funny', '#iconic', '#savage']
+      },
+      {
+        id: 355,
+        title: "Legally Blonde - What Like It's Hard?",
+        quote: "What, like it's hard?",
+        url: "https://www.youtube.com/watch?v=3P_4qs6rp78",
+        start: 31,
+        end: 35,
+        duration: 4,
+        tags: ['#legallyblonde', '#whatlikeitshard', '#ellewoods', '#reesewitherspoon', '#harvard', '#iconic', '#meme', '#funny', '#confident', '#badass']
+      },
+      {
+        id: 356,
+        title: "Legally Blonde - Makes Me Want a Hotdog",
+        quote: "Makes me want a hotdog real bad",
+        url: "https://www.youtube.com/watch?v=TOECY-uk2HE",
+        start: 16,
+        end: 24,
+        duration: 8,
+        tags: ['#legallyblonde', '#hotdog', '#ellewoods', '#reesewitherspoon', '#funny', '#random', '#absurd', '#iconic']
+      },
+      {
+        id: 357,
+        title: "Legally Blonde - Bend and Snap",
+        quote: "The bend and snap works every time!",
+        url: "https://www.youtube.com/watch?v=GQmt9W6Ky7U",
+        start: 98,
+        end: 130,
+        duration: 32,
+        tags: ['#legallyblonde', '#bendandsnap', '#ellewoods', '#reesewitherspoon', '#funny', '#iconic', '#dance', '#salon', '#legendary']
+      },
+      {
+        id: 358,
+        title: "She's the Man - UUUG-LAY",
+        quote: "UUUG-LAY",
+        url: "https://www.youtube.com/watch?v=jDjB8OdxXzg",
+        start: 181,
+        end: 187,
+        duration: 6,
+        tags: ['#shestheman', '#ugly', '#uglay', '#amandabeynes', '#funny', '#roast', '#burn', '#iconic', '#meme']
+      },
+      {
+        id: 359,
+        title: "White Chicks - Making My Way Downtown",
+        quote: "Making my way downtown, walking fast, faces pass and I'm homebound",
+        url: "https://www.youtube.com/watch?v=-RNG_tTXXcg",
+        start: 42,
+        end: 73,
+        duration: 31,
+        tags: ['#whitechicks', '#makingmywaydowntown', '#vanessacarlton', '#thousandmiles', '#marlonwayans', '#shawnwayans', '#funny', '#iconic', '#meme', '#singing', '#viral']
+      },
+      {
+        id: 360,
+        title: "White Chicks - Easy White Chocolate",
+        quote: "Easy white chocolate",
+        url: "https://www.youtube.com/watch?v=3pJYSfroiFU",
+        start: 82,
+        end: 98,
+        duration: 16,
+        tags: ['#whitechicks', '#easywhitechocolate', '#marlonwayans', '#shawnwayans', '#funny', '#iconic', '#awkward']
+      },
+      {
+        id: 361,
+        title: "White Chicks - The Deception The Betrayal",
+        quote: "The deception! The betrayal!",
+        url: "https://www.youtube.com/watch?v=SuSRacSWfiw",
+        start: 25,
+        end: 37,
+        duration: 12,
+        tags: ['#whitechicks', '#thedeception', '#thebetrayal', '#marlonwayans', '#shawnwayans', '#funny', '#dramatic', '#iconic', '#meme', '#overreacting']
+      },
+      {
+        id: 362,
+        title: "How I Met Your Mother - Challenge Accepted",
+        quote: "Challenge accepted!",
+        url: "https://www.youtube.com/watch?v=4iOi_iPNC50",
+        start: 23,
+        end: 33,
+        duration: 10,
+        tags: ['#howimetyourmother', '#himym', '#challengeaccepted', '#barney', '#neilpatrickharris', '#funny', '#iconic', '#meme', '#hype', '#legendary']
+      },
+      {
+        id: 363,
+        title: "How I Met Your Mother - Legen-Wait For It",
+        quote: "Legen... wait for it... dary! Legendary!",
+        url: "https://www.youtube.com/watch?v=C19US6rqqAo",
+        start: 7,
+        end: 14,
+        duration: 7,
+        tags: ['#howimetyourmother', '#himym', '#legendary', '#legendwaitforit', '#barney', '#neilpatrickharris', '#funny', '#iconic', '#meme', '#viral']
+      },
+      {
+        id: 364,
+        title: "How I Met Your Mother - Nothing Good After 2am",
+        quote: "Nothing good happens after 2 a.m.",
+        url: "https://www.youtube.com/watch?v=EKQT7WjPUIk",
+        start: 0,
+        end: 6,
+        duration: 6,
+        tags: ['#howimetyourmother', '#himym', '#nothingoodafter2am', '#2am', '#ted', '#joshradnor', '#relatable', '#truth', '#latenight', '#funny']
+      },
+      {
+        id: 365,
+        title: "Superbad - People Don't Forget",
+        quote: "People don't forget",
+        url: "https://www.youtube.com/watch?v=WctQXYKcsXQ",
+        start: 97,
+        end: 103,
+        duration: 6,
+        tags: ['#superbad', '#peopledontforget', '#seth', '#jonahhill', '#funny', '#iconic', '#meme', '#awkward', '#embarrassing']
+      },
+      {
+        id: 366,
+        title: "That 70s Show - Foot in Your A**",
+        quote: "I will put my foot in your a**",
+        url: "https://www.youtube.com/watch?v=OzEzHs2LI00",
+        start: 11,
+        end: 14,
+        duration: 3,
+        tags: ['#that70sshow', '#footinyourass', '#red', '#kurtwoodsmith', '#funny', '#threat', '#iconic', '#meme', '#dad', '#warning']
+      },
+      {
+        id: 367,
+        title: "That 70s Show - I Can't Control the Weather",
+        quote: "I can't control the weather",
+        url: "https://www.youtube.com/watch?v=OzEzHs2LI00",
+        start: 13,
+        end: 17,
+        duration: 4,
+        tags: ['#that70sshow', '#cantcontroltheweather', '#kelso', '#ashtonkutcher', '#funny', '#absurd', '#dumb', '#iconic', '#meme']
+      },
+      {
+        id: 368,
+        title: "Talladega Nights - If You Ain't First You're Last",
+        quote: "If you ain't first, you're last",
+        url: "https://www.youtube.com/watch?v=y4usE2RePqo",
+        start: 0,
+        end: 3,
+        duration: 3,
+        tags: ['#talladaganights', '#ifyouaintfirst', '#yourelast', '#rickybobby', '#willferrell', '#funny', '#iconic', '#meme', '#racing', '#motivational', '#winning']
+      },
+      {
+        id: 369,
+        title: "Talladega Nights - Shake and Bake",
+        quote: "Shake and bake!",
+        url: "https://www.youtube.com/watch?v=7o5vqBk4WMM",
+        start: 60,
+        end: 66,
+        duration: 6,
+        tags: ['#talladaganights', '#shakeandbake', '#rickybobby', '#cal', '#willferrell', '#johncreilly', '#funny', '#iconic', '#meme', '#hype', '#teamwork']
+      },
+      {
+        id: 370,
+        title: "Talladega Nights - I Piss Excellence",
+        quote: "I piss excellence",
+        url: "https://www.youtube.com/watch?v=1Rbt1TnQVwI",
+        start: 13,
+        end: 16,
+        duration: 3,
+        tags: ['#talladaganights', '#ipissexcellence', '#rickybobby', '#willferrell', '#funny', '#iconic', '#meme', '#confidence', '#savage', '#badass']
+      },
+      {
+        id: 371,
+        title: "Modern Family - Life Will Be All Like Whaaat",
+        quote: "Life will be all like, whaaatt?",
+        url: "https://www.youtube.com/watch?v=0rylq43HnUU",
+        start: 42,
+        end: 47,
+        duration: 5,
+        tags: ['#modernfamily', '#lifewillbealllikewhat', '#whaaat', '#gloriad', '#sofiavergara', '#funny', '#iconic', '#meme', '#relatable', '#surprise']
+      },
+      {
+        id: 372,
+        title: "Modern Family - He's My Soulmate",
+        quote: "He's my soulmate",
+        url: "https://www.youtube.com/watch?v=yaSBXuwEZJE",
+        start: 286,
+        end: 294,
+        duration: 8,
+        tags: ['#modernfamily', '#soulmate', '#mitchell', '#cameron', '#jessetylerFerguson', '#ericstonestreet', '#emotional', '#love', '#touching', '#friendship']
+      },
+      {
+        id: 373,
+        title: "Pitch Perfect - You Can Call Me Fat Amy",
+        quote: "You can call me Fat Amy",
+        url: "https://www.youtube.com/watch?v=sMWnN_9GiX0",
+        start: 93,
+        end: 95,
+        duration: 2,
+        tags: ['#pitchperfect', '#fatamy', '#rebelwilson', '#funny', '#iconic', '#meme', '#confidence', '#savage', '#introduction']
+      },
+      {
+        id: 374,
+        title: "Pitch Perfect - Aca-scuse Me",
+        quote: "Aca-scuse me?",
+        url: "https://www.youtube.com/watch?v=2Xfzv8lUnEI",
+        start: 48,
+        end: 54,
+        duration: 6,
+        tags: ['#pitchperfect', '#acascuseme', '#aubrey', '#annakendrick', '#funny', '#iconic', '#meme', '#shocked', '#offended']
+      },
+      {
+        id: 375,
+        title: "Pitch Perfect - I Set Fires",
+        quote: "I set fires to feel joy",
+        url: "https://www.youtube.com/watch?v=b7BXr4Zzlkw",
+        start: 18,
+        end: 22,
+        duration: 4,
+        tags: ['#pitchperfect', '#isetfires', '#setfirestofeeljoy', '#lilly', '#hanahmaelee', '#funny', '#dark', '#absurd', '#iconic', '#meme', '#wtf']
+      },
+      {
+        id: 376,
+        title: "Keeping Up With The Kardashians - People Are Dying",
+        quote: "Kim, there are people that are dying",
+        url: "https://www.youtube.com/watch?v=6u-0lH2-jDM",
+        start: 41,
+        end: 51,
+        duration: 10,
+        tags: ['#kuwtk', '#kardashians', '#peoplearedying', '#khloe', '#khloekardashian', '#kimkardashian', '#funny', '#iconic', '#meme', '#viral', '#perspective', '#dramaqueen']
+      },
+      {
+        id: 377,
+        title: "Dance Moms - So Many Things I Could Say",
+        quote: "There are so many things I could say to you right now",
+        url: "https://www.youtube.com/watch?v=xOIHOyWmJxo",
+        start: 12,
+        end: 17,
+        duration: 5,
+        tags: ['#dancemoms', '#abbylee', '#abbyleemiller', '#somanythings', '#funny', '#iconic', '#meme', '#realitytv', '#drama', '#threat']
+      },
+      {
+        id: 378,
+        title: "Dance Moms - We're Doing Eye Makeup",
+        quote: "We're doing eye makeup",
+        url: "https://www.youtube.com/watch?v=LReyY202m98",
+        start: 73,
+        end: 79,
+        duration: 6,
+        tags: ['#dancemoms', '#eyemakeup', '#abbyleemiller', '#funny', '#iconic', '#meme', '#realitytv', '#random', '#absurd']
+      },
+      {
+        id: 379,
+        title: "Austin Powers - Yeah Baby",
+        quote: "Oh behave! Yeah baby, yeah!",
+        url: "https://www.youtube.com/watch?v=JBHKVAs85Ko",
+        start: 13,
+        end: 18,
+        duration: 5,
+        tags: ['#austinpowers', '#yeahbaby', '#ohbehave', '#mikemyers', '#funny', '#iconic', '#meme', '#legendary', '#british', '#spy']
+      },
+      {
+        id: 380,
+        title: "Top Gun - I Feel the Need",
+        quote: "I feel the need, the need for speed!",
+        url: "https://www.youtube.com/watch?v=4PzpztFJZP8",
+        start: 0,
+        end: 8,
+        duration: 8,
+        tags: ['#topgun', '#ifeeltheneed', '#theneedforspeed', '#maverick', '#goose', '#tomcruise', '#iconic', '#meme', '#legendary', '#hype', '#action']
+      },
+      {
+        id: 381,
+        title: "Top Gun - Talk to Me Goose",
+        quote: "Talk to me Goose",
+        url: "https://www.youtube.com/watch?v=WzIestwpfiQ",
+        start: 159,
+        end: 183,
+        duration: 24,
+        tags: ['#topgun', '#talktoMegoose', '#maverick', '#goose', '#tomcruise', '#emotional', '#sad', '#friendship', '#iconic', '#legendary']
+      },
+      {
+        id: 382,
+        title: "RuPaul's Drag Race - I Haven't Been Crying",
+        quote: "I haven't been crying, you've been crying",
+        url: "https://www.youtube.com/watch?v=OvRNzVWwflM",
+        start: 23,
+        end: 33,
+        duration: 10,
+        tags: ['#rupaulsdragrace', '#dragrace', '#ihaventbeencrying', '#denial', '#funny', '#iconic', '#meme', '#emotional', '#relatable']
+      },
+      {
+        id: 383,
+        title: "The Devil Wears Prada - One Stomach Flu Away",
+        quote: "I'm just one stomach flu away from my goal weight",
+        url: "https://www.youtube.com/watch?v=EgwIQULkjzc",
+        start: 44,
+        end: 47,
+        duration: 3,
+        tags: ['#thedevilwearsprada', '#stomachflu', '#goalweight', '#emily', '#emilyblunt', '#funny', '#dark', '#iconic', '#meme', '#diet', '#relatable']
+      },
+      {
+        id: 384,
+        title: "Gossip Girl - You Know You Love Me",
+        quote: "You know you love me. XOXO, Gossip Girl",
+        url: "https://www.youtube.com/watch?v=6U0H2ClOXY4",
+        start: 5,
+        end: 11,
+        duration: 6,
+        tags: ['#gossipgirl', '#youknowyouloveme', '#xoxo', '#gossipgirl', '#iconic', '#legendary', '#outro', '#meme', '#viral', '#nyc']
+      },
+      {
+        id: 385,
+        title: "The Matrix - There Is No Spoon",
+        quote: "There is no spoon",
+        url: "https://www.youtube.com/watch?v=uAXtO5dMqEI",
+        start: 36,
+        end: 46,
+        duration: 10,
+        tags: ['#thematrix', '#thereisnospoon', '#neo', '#keanureeves', '#philosophical', '#iconic', '#meme', '#legendary', '#mindblown', '#deepthought']
+      },
+      {
+        id: 386,
+        title: "Rick and Morty - Weddings Are Basically Funerals",
+        quote: "Weddings are basically funerals with cake",
+        url: "https://www.youtube.com/watch?v=Y61-Toy3UXg",
+        start: 0,
+        end: 3,
+        duration: 3,
+        tags: ['#rickandmorty', '#weddingsarefunerals', '#funeralswithcake', '#rick', '#justinroiland', '#funny', '#dark', '#sarcastic', '#iconic', '#meme', '#relatable']
+      },
+      {
+        id: 387,
+        title: "Rick and Morty - I'm a Pickle!",
+        quote: "I'm pickle Riiick!",
+        url: "https://www.youtube.com/watch?v=_gRnvDRFYN4",
+        start: 31,
+        end: 38,
+        duration: 7,
+        tags: ['#rickandmorty', '#pickleRick', '#impicklerick', '#rick', '#justinroiland', '#funny', '#iconic', '#meme', '#viral', '#legendary', '#absurd']
+      },
+      {
+        id: 388,
+        title: "Neighbors - Bros Before Hoes",
+        quote: "Bros before hoes. Why? Because your hoes come and go, but your bros are always there for you",
+        url: "https://www.youtube.com/watch?v=-lpHAtmOvkw",
+        start: 32,
+        end: 67,
+        duration: 35,
+        tags: ['#neighbors', '#brosbeforehoes', '#zacefron', '#davefranco', '#funny', '#iconic', '#friendship', '#bromance', '#meme']
+      },
+      {
+        id: 389,
+        title: "American Pie - One Time at Band Camp",
+        quote: "This one time, at band camp...",
+        url: "https://www.youtube.com/watch?v=K9NeSYqFiLY",
+        start: 0,
+        end: 4,
+        duration: 4,
+        tags: ['#americanpie', '#onetimeatbandcamp', '#bandcamp', '#michelle', '#alysonhannigan', '#funny', '#iconic', '#meme', '#legendary', '#awkward']
+      },
+      {
+        id: 390,
+        title: "American Pie - Stroking the Salami",
+        quote: "What? I was just stroking the salami",
+        url: "https://www.youtube.com/watch?v=SqCu7zV3b5A",
+        start: 27,
+        end: 32,
+        duration: 5,
+        tags: ['#americanpie', '#strokingthesalami', '#jim', '#jasonbiggs', '#funny', '#awkward', '#iconic', '#meme', '#embarrassing']
+      },
+      {
+        id: 391,
+        title: "Dazed and Confused - All Right All Right All Right",
+        quote: "All right, all right, all right",
+        url: "https://www.youtube.com/watch?v=EuER2Puym4I",
+        start: 33,
+        end: 36,
+        duration: 3,
+        tags: ['#dazedandconfused', '#allrightallright', '#wooderson', '#matthewmcconaughey', '#funny', '#iconic', '#meme', '#legendary', '#cool', '#chill']
+      },
+      {
+        id: 392,
+        title: "Dazed and Confused - Just Gotta Keep Livin'",
+        quote: "That's what I love about these high school girls, man. I get older, they stay the same age",
+        url: "https://www.youtube.com/watch?v=Ls_8cFgBUj4",
+        start: 39,
+        end: 44,
+        duration: 5,
+        tags: ['#dazedandconfused', '#keeplivin', '#wooderson', '#matthewmcconaughey', '#funny', '#iconic', '#meme', '#legendary', '#chill']
+      },
+      {
+        id: 393,
+        title: "Dazed and Confused - Check You Later",
+        quote: "Check you later",
+        url: "https://www.youtube.com/watch?v=DpMD9FrHe0o",
+        start: 12,
+        end: 14,
+        duration: 2,
+        tags: ['#dazedandconfused', '#checkyoulater', '#wooderson', '#matthewmcconaughey', '#funny', '#iconic', '#cool', '#chill', '#farewell']
+      },
+      {
+        id: 394,
+        title: "Project X - This Is Project X Yo",
+        quote: "This is Project X, yo",
+        url: "https://www.youtube.com/watch?v=Tp4pVP-xwrc",
+        start: 0,
+        end: 11,
+        duration: 11,
+        tags: ['#projectx', '#thisisprojectx', '#party', '#epic', '#hype', '#funny', '#iconic', '#legendary', '#wild', '#crazy']
+      },
+      {
+        id: 395,
+        title: "Project X - Neighbor",
+        quote: "Neighbor!",
+        url: "https://www.youtube.com/watch?v=mhAPqoIFbs4",
+        start: 74,
+        end: 78,
+        duration: 4,
+        tags: ['#projectx', '#neighbor', '#party', '#funny', '#iconic', '#meme', '#wild', '#crazy']
+      },
+      {
+        id: 396,
+        title: "Anger Management - I Feel Pretty",
+        quote: "I feel pretty, oh so pretty",
+        url: "https://www.youtube.com/watch?v=WeDHZWS5uMo",
+        start: 68,
+        end: 74,
+        duration: 6,
+        tags: ['#angermanagement', '#ifeelpretty', '#buddy', '#adamSandler', '#jacknicholson', '#funny', '#singing', '#iconic', '#meme', '#absurd']
+      },
+      {
+        id: 397,
+        title: "Gone With the Wind - Frankly My Dear",
+        quote: "Frankly my dear, I don't give a damn",
+        url: "https://www.youtube.com/watch?v=qd2887hknyU",
+        start: 26,
+        end: 30,
+        duration: 4,
+        tags: ['#gonewiththewind', '#franklymydear', '#idontgiveadamn', '#rhettbutler', '#clarkgable', '#iconic', '#legendary', '#classic', '#meme', '#savage', '#burns']
+      },
+      {
+        id: 398,
+        title: "When Harry Met Sally - I'll Have What She's Having",
+        quote: "I'll have what she's having",
+        url: "https://www.youtube.com/watch?v=lNEX0fbGePg",
+        start: 154,
+        end: 156,
+        duration: 2,
+        tags: ['#whenharrymetsally', '#illhavewhatsheshaving', '#orgasm', '#megryan', '#billycrystal', '#funny', '#iconic', '#legendary', '#meme', '#classic']
+      },
+      {
+        id: 399,
+        title: "Step Brothers - So Much Room for Activities",
+        quote: "There's so much room for activities!",
+        url: "https://www.youtube.com/watch?v=ZS90l4L2t6k",
+        start: 31,
+        end: 35,
+        duration: 4,
+        tags: ['#stepbrothers', '#somuchroomforactivities', '#brennan', '#willferrell', '#funny', '#iconic', '#meme', '#excited', '#hype', '#legendary']
+      },
+      {
+        id: 400,
+        title: "Step Brothers - Did We Just Become Best Friends",
+        quote: "Did we just become best friends? YEP!",
+        url: "https://www.youtube.com/watch?v=pYq9g8aqRTM",
+        start: 118,
+        end: 121,
+        duration: 3,
+        tags: ['#stepbrothers', '#didwejustbecombestfriends', '#yep', '#brennan', '#dale', '#willferrell', '#johncreilly', '#funny', '#iconic', '#meme', '#friendship', '#bromance']
+      },
+      {
+        id: 401,
+        title: "Step Brothers - Did You Touch My Drumset",
+        quote: "Did you touch my drumset?",
+        url: "https://www.youtube.com/watch?v=M5ZysX4Eih0",
+        start: 204,
+        end: 211,
+        duration: 7,
+        tags: ['#stepbrothers', '#didyoutouchmydrumset', '#drumset', '#dale', '#johncreilly', '#funny', '#iconic', '#meme', '#angry', '#possessive']
+      },
+      {
+        id: 402,
+        title: "Step Brothers - Boats and Hoes",
+        quote: "Boats and hoes, boats and hoes, gotta have me my boats and hoes",
+        url: "https://www.youtube.com/watch?v=23s07zSG4lg",
+        start: 6,
+        end: 26,
+        duration: 20,
+        tags: ['#stepbrothers', '#boatsandhoes', '#prestigeworldwide', '#brennan', '#dale', '#willferrell', '#johncreilly', '#funny', '#iconic', '#meme', '#singing', '#legendary']
+      },
+      {
+        id: 403,
+        title: "10 Things I Hate About You - I Hate the Way",
+        quote: "I hate the way I don't hate you",
+        url: "https://www.youtube.com/watch?v=31N_HM2f9Ks",
+        start: 79,
+        end: 82,
+        duration: 3,
+        tags: ['#10thingsIhateaboutyou', '#ihatetheway', '#poem', '#kat', '#juliastiles', '#romantic', '#emotional', '#love', '#iconic', '#legendary']
+      },
+      {
+        id: 404,
+        title: "Grown Ups - Chocolate Wasted",
+        quote: "I want to get chocolate wasted!",
+        url: "https://www.youtube.com/watch?v=B5aK7ycEMUY",
+        start: 10,
+        end: 27,
+        duration: 17,
+        tags: ['#grownups', '#chocolatewasted', '#adamsandler', '#funny', '#iconic', '#meme', '#kids', '#cute', '#party', '#legendary']
+      },
+      {
+        id: 405,
+        title: "Grown Ups 2 - Bruce Springsteen",
+        quote: "Bruce Springsteen!",
+        url: "https://www.youtube.com/watch?v=C3K_6e8h1kE",
+        start: 4,
+        end: 14,
+        duration: 10,
+        tags: ['#grownups2', '#brucespringsteen', '#adamsandler', '#funny', '#iconic', '#meme', '#random', '#absurd', '#wild']
+      },
+      {
+        id: 406,
+        title: "Grown Ups - Somebody Kill That Turkey",
+        quote: "Somebody kill that turkey!",
+        url: "https://www.youtube.com/watch?v=W3nIYy0tSg4",
+        start: 4,
+        end: 9,
+        duration: 5,
+        tags: ['#grownups', '#somebodykillthatturtley', '#turkey', '#adamsandler', '#funny', '#iconic', '#meme', '#random', '#absurd']
+      },
+      {
+        id: 407,
+        title: "Happy Gilmore - Just Tap It In",
+        quote: "Just tap it in. Just tap it in. Give it a little tappy",
+        url: "https://www.youtube.com/watch?v=-br7JKuaZHQ",
+        start: 3,
+        end: 25,
+        duration: 22,
+        tags: ['#happygilmore', '#justtapitin', '#tappy', '#adamsandler', '#golf', '#funny', '#iconic', '#meme', '#sports', '#legendary']
+      },
+      {
+        id: 408,
+        title: "Dirty Dancing - Nobody Puts Baby in a Corner",
+        quote: "Nobody puts Baby in a corner",
+        url: "https://www.youtube.com/watch?v=ypKSbnYOrwE",
+        start: 2,
+        end: 4,
+        duration: 2,
+        tags: ['#dirtydancing', '#nobodyputsbaby', '#babyinacorner', '#johnny', '#patrickswayze', '#iconic', '#legendary', '#romantic', '#meme', '#badass']
+      },
+      {
+        id: 409,
+        title: "21 Jump Street - My Name Is Jeff",
+        quote: "My name is Jeff",
+        url: "https://www.youtube.com/watch?v=-tWZv6pC0Bo",
+        start: 99,
+        end: 104,
+        duration: 5,
+        tags: ['#21jumpstreet', '#mynameisJeff', '#jeff', '#channingtatum', '#funny', '#iconic', '#meme', '#viral', '#legendary', '#stoned']
+      },
+      {
+        id: 410,
+        title: "The Other Guys - Aim for the Bushes",
+        quote: "Aim for the bushes!",
+        url: "https://www.youtube.com/watch?v=MvkN3003iU4",
+        start: 77,
+        end: 83,
+        duration: 6,
+        tags: ['#theotherguys', '#aimforthebushes', '#dwaynejohnson', '#samuelljackson', '#willferrell', '#markwahlberg', '#funny', '#iconic', '#meme', '#absurd', '#action']
+      },
+      {
+        id: 411,
+        title: "Elf - Santa I Know Him!",
+        quote: "SANTA! Oh my God! Santa's coming! I know him! I know him!",
+        url: "https://www.youtube.com/watch?v=B3FSFXJmdp8",
+        start: 3,
+        end: 12,
+        duration: 9,
+        tags: ['#elf', '#santaiknowHim', '#buddy', '#willferrell', '#christmas', '#funny', '#iconic', '#meme', '#wholesome', '#holiday', '#excited', '#legendary']
+      },
+      {
+        id: 412,
+        title: "Die Hard - Yippee Ki-Yay",
+        quote: "Yippee ki-yay, motherf***er",
+        url: "https://www.youtube.com/watch?v=EU0zqPGqeYA",
+        start: 13,
+        end: 18,
+        duration: 5,
+        tags: ['#diehard', '#yippeekiyay', '#yippeekiyay', '#johnmclane', '#bruceWillis', '#action', '#badass', '#iconic', '#legendary', '#meme', '#epic']
+      },
+      {
+        id: 413,
+        title: "Madea - Hallelujer",
+        quote: "Hallelujer!",
+        url: "https://www.youtube.com/watch?v=I2ILpOVxvuE",
+        start: 20,
+        end: 24,
+        duration: 4,
+        tags: ['#madea', '#hallelujer', '#hallelujah', '#tylerperry', '#funny', '#iconic', '#meme', '#church', '#praise', '#legendary', '#viral']
+      },
+      {
+        id: 414,
+        title: "Madea - Brownies for My Brownie",
+        quote: "I brought brownies for my brownie!",
+        url: "https://www.youtube.com/watch?v=Zwh41u6Lf-8",
+        start: 77,
+        end: 82,
+        duration: 5,
+        tags: ['#madea', '#browniesformybrownie', '#tylerperry', '#funny', '#iconic', '#meme', '#wholesome', '#sweet', '#funny']
+      },
+      {
+        id: 415,
+        title: "Madea - Abort Abort",
+        quote: "Abort! Abort!",
+        url: "https://www.youtube.com/watch?v=kHjgZyyOXTQ",
+        start: 165,
+        end: 191,
+        duration: 26,
+        tags: ['#madea', '#abort', '#tylerperry', '#funny', '#iconic', '#meme', '#panic', '#runaway', '#wild', '#chaotic']
+      },
+      {
+        id: 416,
+        title: "Madea - 1-800 Choke Dat Hoe",
+        quote: "1-800 choke dat hoe",
+        url: "https://www.youtube.com/watch?v=kHjgZyyOXTQ",
+        start: 142,
+        end: 150,
+        duration: 8,
+        tags: ['#madea', '#1800chokedathoe', '#tylerperry', '#funny', '#iconic', '#meme', '#savage', '#viral', '#legendary']
+      },
+      {
+        id: 417,
+        title: "Madea - Hold On",
+        quote: "Hold on, hold on, hold on",
+        url: "https://www.youtube.com/watch?v=V8rcXrdTP1k",
+        start: 272,
+        end: 277,
+        duration: 5,
+        tags: ['#madea', '#holdon', '#tylerperry', '#funny', '#iconic', '#meme', '#patience', '#wait', '#dramatic']
+      },
+      {
+        id: 418,
+        title: "Madea - I'm the Owner of This House",
+        quote: "I'm the owner of this house!",
+        url: "https://www.youtube.com/watch?v=WVOVzmrmAxo",
+        start: 5,
+        end: 11,
+        duration: 6,
+        tags: ['#madea', '#imtheowner', '#ownerofthishouse', '#tylerperry', '#funny', '#iconic', '#meme', '#boss', '#authority', '#savage']
+      },
+      {
+        id: 419,
+        title: "Norbit - Waterslide",
+        quote: "Norbit waterslide scene",
+        url: "https://www.youtube.com/watch?v=VQjD-9sqgEw",
+        start: 15,
+        end: 24,
+        duration: 9,
+        tags: ['#norbit', '#waterslide', '#eddiemurphy', '#funny', '#iconic', '#meme', '#chaotic', '#wild', '#comedy']
+      },
+      {
+        id: 420,
+        title: "Norbit - How You Doin?",
+        quote: "How you doin?",
+        url: "https://www.youtube.com/watch?v=VQjD-9sqgEw",
+        start: 38,
+        end: 42,
+        duration: 4,
+        tags: ['#norbit', '#howyoudoin', '#rasputia', '#eddiemurphy', '#funny', '#iconic', '#meme', '#flirting', '#pickupline']
+      },
+      {
+        id: 421,
+        title: "Caddyshack - Be the Ball",
+        quote: "Be the ball, Danny. Na na na na na",
+        url: "https://www.youtube.com/watch?v=I3akC_INsFc",
+        start: 88,
+        end: 99,
+        duration: 11,
+        tags: ['#caddyshack', '#betheball', '#chevychase', '#tywebb', '#golf', '#funny', '#iconic', '#legendary', '#meme', '#zen', '#classic']
+      },
+      {
+        id: 422,
+        title: "The Sandlot - You're Killing Me Smalls",
+        quote: "You're killing me Smalls!",
+        url: "https://www.youtube.com/watch?v=hxJPJ6JY0Pk",
+        start: 11,
+        end: 14,
+        duration: 3,
+        tags: ['#thesandlot', '#yourekillingmesmalls', '#smalls', '#benny', '#funny', '#iconic', '#legendary', '#meme', '#classic', '#baseball', '#kids']
+      },
+      {
+        id: 423,
+        title: "Mrs. Doubtfire - Help Is on the Way Dear",
+        quote: "Help is on the way, dear!",
+        url: "https://www.youtube.com/watch?v=Eyhqyd2dtN8",
+        start: 26,
+        end: 37,
+        duration: 11,
+        tags: ['#mrsdoubtfire', '#helpisontheway', '#mrsdoubtfire', '#robinwilliams', '#funny', '#iconic', '#meme', '#disguise', '#classic', '#wholesome']
+      },
+      {
+        id: 424,
+        title: "Ted - Thunder Buddies for Life",
+        quote: "Thunder buddies for life, right Johnny?",
+        url: "https://www.youtube.com/watch?v=TsKZY41XeVs",
+        start: 76,
+        end: 92,
+        duration: 16,
+        tags: ['#ted', '#thunderbuddies', '#thunderbuddiesforlife', '#ted', '#markwahlberg', '#funny', '#iconic', '#meme', '#friendship', '#bromance', '#wholesome']
+      },
+      {
+        id: 425,
+        title: "Fast and Furious - Quarter Mile at a Time",
+        quote: "I live my life a quarter mile at a time",
+        url: "https://www.youtube.com/watch?v=1gufXyDf-GI",
+        start: 160,
+        end: 171,
+        duration: 11,
+        tags: ['#fastandfurious', '#fastfurious', '#quartermile', '#quartermile', '#dominictoretto', '#vindiesel', '#iconic', '#legendary', '#meme', '#cars', '#streetracing', '#deep', '#philosophical']
+      },
+      {
+        id: 426,
+        title: "The Karate Kid - Wax On Wax Off",
+        quote: "Wax on, wax off",
+        url: "https://www.youtube.com/watch?v=-P11Bcpyw4g",
+        start: 77,
+        end: 99,
+        duration: 22,
+        tags: ['#thekaratekid', '#waxon', '#waxoff', '#mryagi', '#patmorita', '#danielsan', '#training', '#iconic', '#legendary', '#meme', '#classic', '#motivational']
+      },
+      {
+        id: 427,
+        title: "Home Alone - Keep the Change You Filthy Animal",
+        quote: "Keep the change, ya filthy animal",
+        url: "https://www.youtube.com/watch?v=yncJzFggl0c",
+        start: 32,
+        end: 36,
+        duration: 4,
+        tags: ['#homealone', '#keepthechange', '#yafilthyanimal', '#kevingalloway', '#macaulayculkin', '#funny', '#iconic', '#legendary', '#meme', '#christmas', '#classic']
+      },
+      {
+        id: 428,
+        title: "Home Alone - Pass This to Kevin",
+        quote: "Merry Christmas, ya filthy animal",
+        url: "https://www.youtube.com/watch?v=hZ9q3PtiYu8",
+        start: 8,
+        end: 49,
+        duration: 41,
+        tags: ['#homealone', '#passthistokevin', '#merrychristmas', '#filthyanimal', '#kevin', '#macaulayculkin', '#funny', '#iconic', '#christmas', '#classic', '#wholesome']
+      },
+      {
+        id: 429,
+        title: "Euphoria - Is This Play About Us?",
+        quote: "Is this play about us?",
+        url: "https://www.youtube.com/watch?v=m4P1M-Wy7r4",
+        start: 10,
+        end: 13,
+        duration: 3,
+        tags: ['#euphoria', '#isthisplayaboutus', '#rue', '#jules', '#zendaya', '#emotional', '#dramatic', '#love', '#iconic', '#hbo']
+      },
+      {
+        id: 430,
+        title: "Drake and Josh - Hug Me Brotha",
+        quote: "Hug me brotha!",
+        url: "https://www.youtube.com/watch?v=nLVqyugtz3M",
+        start: 0,
+        end: 4,
+        duration: 4,
+        tags: ['#drakeandjosh', '#hugmebrotha', '#hugmebrother', '#josh', '#drake', '#drakebell', '#joshpeck', '#funny', '#iconic', '#meme', '#wholesome', '#bromance', '#nickelodeon']
+      },
+      {
+        id: 431,
+        title: "Drake and Josh - I Ain't Calling You a Truther",
+        quote: "I ain't calling you a truther but I ain't calling you a liar",
+        url: "https://www.youtube.com/watch?v=w6QDRMq8eGA",
+        start: 4,
+        end: 7,
+        duration: 3,
+        tags: ['#drakeandjosh', '#ainttcallingyouatruther', '#liar', '#truther', '#funny', '#iconic', '#meme', '#nickelodeon', '#confused', '#logic']
+      },
+      {
+        id: 432,
+        title: "Full House - You Got It Dude",
+        quote: "You got it, dude!",
+        url: "https://www.youtube.com/watch?v=Lh3zV7JOwZU",
+        start: 247,
+        end: 255,
+        duration: 8,
+        tags: ['#fullhouse', '#yougotitdude', '#michelle', '#marykateolsen', '#ashleyolsen', '#funny', '#iconic', '#meme', '#wholesome', '#cute', '#classic', '#nostalgia']
+      },
+      {
+        id: 433,
+        title: "We're the Millers - You Guys Are Getting Paid?",
+        quote: "You guys are getting paid?",
+        url: "https://www.youtube.com/watch?v=684NkDeSJis",
+        start: 50,
+        end: 65,
+        duration: 15,
+        tags: ['#werethemillers', '#youguysaregettingpaid', '#kenny', '#willpoulter', '#funny', '#iconic', '#meme', '#shocked', '#relatable', '#money']
+      },
+      {
+        id: 434,
+        title: "Shrek - Ogres Are Like Onions",
+        quote: "Ogres are like onions. Onions have layers. Ogres have layers",
+        url: "https://www.youtube.com/watch?v=-FtCTW2rVFM",
+        start: 43,
+        end: 57,
+        duration: 14,
+        tags: ['#shrek', '#ogresarelikeonions', '#onionshavelayes', '#shrek', '#mikemyers', '#donkey', '#eddiemurphy', '#funny', '#iconic', '#legendary', '#meme', '#philosophical', '#animated']
+      },
+      {
+        id: 435,
+        title: "Saltburn - Final Dance",
+        quote: "Oliver's final dance scene",
+        url: "https://www.youtube.com/watch?v=WhTly-1kHqQ",
+        start: 88,
+        end: 105,
+        duration: 17,
+        tags: ['#saltburn', '#finaldance', '#oliver', '#barrykeoghan', '#murderonthedancefloor', '#iconic', '#viral', '#legendary', '#shocking', '#dark', '#dancing']
+      },
+      {
+        id: 436,
+        title: "Friday - Bye Felicia",
+        quote: "Bye Felicia",
+        url: "https://www.youtube.com/watch?v=5ZALQf6MiOo",
+        start: 50,
+        end: 54,
+        duration: 4,
+        tags: ['#friday', '#byefelicia', '#felicia', '#icecube', '#funny', '#iconic', '#legendary', '#meme', '#viral', '#dismissive', '#savage']
+      },
+      {
+        id: 437,
+        title: "Good Burger - Welcome to Good Burger",
+        quote: "Welcome to Good Burger, home of the Good Burger, can I take your order?",
+        url: "https://www.youtube.com/watch?v=mSAgtpec7Ac",
+        start: 4,
+        end: 8,
+        duration: 4,
+        tags: ['#goodburger', '#welcometogoodburger', '#ed', '#kelonniqua', '#funny', '#iconic', '#meme', '#nickelodeon', '#classic', '#nostalgia', '#customerservice']
+      },
+      {
+        id: 438,
+        title: "The Parent Trap - Handshake",
+        quote: "The Parent Trap secret handshake",
+        url: "https://www.youtube.com/watch?v=7AQCTft9FGg",
+        start: 1,
+        end: 12,
+        duration: 11,
+        tags: ['#theparenttrap', '#handshake', '#annie', '#hallie', '#lindseylohan', '#wholesome', '#iconic', '#friendship', '#twins', '#cute', '#nostalgia', '#classic']
+      },
+      {
+        id: 439,
+        title: "The Incredibles - Where Is My Super Suit",
+        quote: "Where is my super suit?!",
+        url: "https://www.youtube.com/watch?v=5kw9A39j57c",
+        start: 11,
+        end: 19,
+        duration: 8,
+        tags: ['#theincredibles', '#whereismysupersuit', '#frozone', '#samuelljackson', '#funny', '#iconic', '#legendary', '#meme', '#animated', '#pixar', '#superhero', '#urgent']
       }
   ];
 
